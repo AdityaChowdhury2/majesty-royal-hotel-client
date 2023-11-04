@@ -38,7 +38,11 @@ const MyNavbar = () => {
 							<Dropdown.Item>Sign out</Dropdown.Item>
 						</Dropdown> */}
 						<Navbar.Toggle />
-						<Button>Login</Button>
+						<Link to={'/login'}>
+							<button className="px-5 py-2.5 rounded-lg text-white bg-[#C19B76] hover:bg-[#b89470] focus:bg-[#C19B76]">
+								Login
+							</button>
+						</Link>
 					</div>
 					<Navbar.Collapse>
 						<Link
