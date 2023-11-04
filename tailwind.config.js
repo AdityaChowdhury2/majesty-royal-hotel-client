@@ -3,9 +3,14 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
   ],
+  darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        "gilda-display": "'Gilda Display', serif"
+      },
       container: {
         center: true,
         screens: {
@@ -14,8 +19,6 @@ export default {
       }
     },
   },
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["light"],
-  },
+  plugins: [require('flowbite/plugin')],
+
 }
