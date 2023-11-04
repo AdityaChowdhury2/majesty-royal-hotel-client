@@ -1,4 +1,4 @@
-import secureLogin from '../assets/secureLogin.svg';
+import secureLogin from '../assets/images/secureLogin.svg';
 import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { BiLockAlt } from 'react-icons/bi';
 import { PiEyeClosedLight, PiEyeLight } from 'react-icons/pi';
@@ -7,8 +7,12 @@ import { useState } from 'react';
 import SocialLogin from '../components/shared/SocialLogin';
 import { Link } from 'react-router-dom';
 import MyNavbar from '../components/MyNavbar';
+import { Helmet } from 'react-helmet-async';
+import useAuth from '../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Register = () => {
+	const { createUser, updateUser } = useAuth();
 	const [isShowPassword, setIsShowPassword] = useShowPassword();
 	const [userForm, setUserForm] = useState();
 
@@ -19,12 +23,36 @@ const Register = () => {
 	const handleFormSubmit = e => {
 		e.preventDefault();
 		console.log(userForm);
+		createUser(userForm)
+			.then(() => {
+				updateUser(userForm)
+					.then(() => {
+						Swal.fire({
+							position: 'top-end',
+							icon: 'success',
+							text: 'User Registration Completed',
+							showConfirmButton: false,
+							timer: 1500,
+						});
+					})
+					.catch(err => console.log(err));
+			})
+			.catch(() => {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Something went wrong!',
+				});
+			});
 	};
 
 	return (
 		<>
+			<Helmet>
+				<title>Majesty Royal || Registration</title>
+			</Helmet>
 			<MyNavbar />
-			<div className="min-w-screen min-h-screen  flex items-center justify-center px-5 py-5">
+			<div className="min-w-screen min-h-[85vh]  flex items-center justify-center px-5 py-5">
 				<div
 					className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
 					style={{ maxWidth: '1000px' }}
@@ -41,7 +69,7 @@ const Register = () => {
 							<form onSubmit={handleFormSubmit}>
 								<div className="flex -mx-3">
 									<div className="w-1/2 px-3 mb-5">
-										<label htmlFor="" className="text-xs font-semibold px-1">
+										<label className="text-xs font-semibold px-1">
 											First name
 										</label>
 										<div className="flex">
@@ -58,7 +86,7 @@ const Register = () => {
 										</div>
 									</div>
 									<div className="w-1/2 px-3 mb-5">
-										<label htmlFor="" className="text-xs font-semibold px-1">
+										<label className="text-xs font-semibold px-1">
 											Last name
 										</label>
 										<div className="flex">
@@ -77,9 +105,7 @@ const Register = () => {
 								</div>
 								<div className="flex -mx-3">
 									<div className="w-full px-3 mb-5">
-										<label htmlFor="" className="text-xs font-semibold px-1">
-											Email
-										</label>
+										<label className="text-xs font-semibold px-1">Email</label>
 										<div className="flex">
 											<div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
 												<AiOutlineMail className="text-[#C19B76]" />
@@ -97,7 +123,7 @@ const Register = () => {
 
 								<div className="flex -mx-3">
 									<div className="w-full px-3 mb-12">
-										<label htmlFor="" className="text-xs font-semibold px-1">
+										<label className="text-xs font-semibold px-1">
 											Password
 										</label>
 										<div className="flex relative">

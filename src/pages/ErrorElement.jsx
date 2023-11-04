@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import errorAnimation from '../assets/errorAnimation.json';
+import errorAnimation from '../assets/animations/errorAnimation.json';
 import Lottie from 'lottie-react';
 
 const ErrorElement = () => {

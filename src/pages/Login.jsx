@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import accessAccount from '../assets/accessAccount.svg';
+import accessAccount from '../assets/images/accessAccount.svg';
 import useShowPassword from '../hooks/useShowPassword';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BiLockAlt } from 'react-icons/bi';
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import SocialLogin from '../components/shared/SocialLogin';
 
 import MyNavbar from '../components/MyNavbar';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
 	const [isShowPassword, setIsShowPassword] = useShowPassword();
@@ -22,6 +23,9 @@ const Login = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Majesty Royal || Login</title>
+			</Helmet>
 			<MyNavbar />
 			<div className="min-w-screen min-h-[85vh]  flex items-center justify-center px-5 py-5">
 				<div
