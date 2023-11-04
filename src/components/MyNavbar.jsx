@@ -46,6 +46,18 @@ const MyNavbar = () => {
 					</div>
 					<Navbar.Collapse>
 						<Link
+							to={'/rooms'}
+							className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 md:border-0 md:hover:bg-transparent md:hover:text-cyan-700"
+						>
+							Rooms
+						</Link>
+						<Link
+							to={'/myBookings'}
+							className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 md:border-0 md:hover:bg-transparent md:hover:text-cyan-700"
+						>
+							Bookings
+						</Link>
+						<Link
 							to={'/contact'}
 							className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 md:border-0 md:hover:bg-transparent md:hover:text-cyan-700"
 						>

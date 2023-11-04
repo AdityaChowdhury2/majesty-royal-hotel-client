@@ -45,12 +45,12 @@ const Login = () => {
 										<label className="text-xs font-semibold px-1">Email</label>
 										<div className="flex">
 											<div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-												<AiOutlineMail className="text-gray-300" />
+												<AiOutlineMail className="text-[#C19B76]" />
 											</div>
 											<input
 												type="email"
 												name="email"
-												className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-[#C19B76] focus:outline-none focus:ring-0"
+												className="w-full -ml-10 pl-10 pr-3 py-2 bg-[#F9F9F9] rounded-lg border-2 border-gray-200 outline-none focus:border-[#C19B76] focus:outline-none focus:ring-0"
 												placeholder="johnsmith@example.com"
 												onChange={handleInputField}
 											/>
@@ -64,20 +64,24 @@ const Login = () => {
 										</label>
 										<div className="flex relative">
 											<div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-												<BiLockAlt className="text-gray-300" />
+												<BiLockAlt className="text-[#C19B76]" />
 											</div>
 											<input
 												type={isShowPassword ? 'text' : 'password'}
 												name="password"
 												onChange={handleInputField}
-												className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-[#C19B76] focus:outline-none focus:ring-0"
+												className="w-full -ml-10 pl-10 pr-3 py-2 bg-[#F9F9F9] rounded-lg border-2 border-gray-200 outline-none focus:border-[#C19B76] focus:outline-none focus:ring-0"
 												placeholder="************"
 											/>
 											<div
 												className="absolute top-1/3 right-3 cursor-pointer"
 												onClick={() => setIsShowPassword(!isShowPassword)}
 											>
-												{isShowPassword ? <PiEyeClosedLight /> : <PiEyeLight />}
+												{isShowPassword ? (
+													<PiEyeClosedLight className="text-[#C19B76]" />
+												) : (
+													<PiEyeLight className="text-[#C19B76]" />
+												)}
 											</div>
 										</div>
 									</div>
@@ -92,11 +96,11 @@ const Login = () => {
 							</form>
 							<p className="text-center">
 								Create New Account?{' '}
-								<Link className="text-[]" to={'/register'}>
+								<Link className="text-[#C19B76]" to={'/register'}>
 									Sign Up
 								</Link>
 							</p>
-							<div className="my-5 before:w-1/3 before:content-[''] before:bg-gray-300 before:divide-x-0 before:absolute relative before:top-2.5 before:h-0.5 before:rounded-sm after:w-1/3 after:content-[''] after:bg-gray-300 after:absolute after:top-2.5 before:left-9 after:right-9 after:h-0.5 text-center">
+							<div className="my-5 before:w-1/3 before:content-[''] before:bg-[#C19B76] before:divide-x-0 before:absolute relative before:top-2.5 before:h-0.5 before:rounded-sm after:w-1/3 after:content-[''] after:bg-[#C19B76] after:absolute after:top-2.5 before:left-9 after:right-9 after:h-0.5 text-center text-[#C19B76]">
 								OR
 							</div>
 							<SocialLogin />
