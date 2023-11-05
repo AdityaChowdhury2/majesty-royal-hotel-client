@@ -11,10 +11,12 @@ import MyNavbar from '../components/MyNavbar';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxios from '../hooks/useAxios';
 
 const Login = () => {
 	const [isShowPassword, setIsShowPassword] = useShowPassword();
 	const [userForm, setUserForm] = useState({});
+	const secureAxios = useAxios();
 	const { loginUser } = useAuth();
 	const handleInputField = e => {
 		setUserForm({ ...userForm, [e.target.name]: e.target.value });
@@ -22,8 +24,14 @@ const Login = () => {
 	const handleFormSubmit = e => {
 		e.preventDefault();
 		console.log(userForm);
-		loginUser(userForm).then(() => {
+		loginUser(userForm).then(res => {
 			toast.success('login successful');
+			secureAxios
+				.post('/api/v1/create-token', { email: res.user.email })
+				.then(res => {
+					console.log(res.data.message);
+				})
+				.catch(err => console.log(err));
 		});
 	};
 
