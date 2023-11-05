@@ -21,8 +21,8 @@ const AuthProvider = ({ children }) => {
 	useEffect(() => {
 		const unSubscribe = onAuthStateChanged(auth, currentUser => {
 			const loggedUser = currentUser?.email || user?.email;
+			setLoading(false);
 			if (loggedUser) {
-				setLoading(false);
 				axios
 					.post(
 						'http://localhost:5000/api/v1/user/create-token',

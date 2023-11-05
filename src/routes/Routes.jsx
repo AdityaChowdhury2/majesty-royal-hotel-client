@@ -6,6 +6,8 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Rooms from '../pages/Rooms/Rooms';
 import Bookings from '../pages/Bookings';
+import RoomDetails from '../pages/RoomDetails/RoomDetails';
+import PrivateRoute from './PrivateRoute';
 
 const Routes = createBrowserRouter([
 	{
@@ -20,6 +22,14 @@ const Routes = createBrowserRouter([
 			{
 				path: '/rooms',
 				element: <Rooms />,
+			},
+			{
+				path: '/room/:roomId',
+				element: (
+					<PrivateRoute>
+						<RoomDetails />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: '/bookings',

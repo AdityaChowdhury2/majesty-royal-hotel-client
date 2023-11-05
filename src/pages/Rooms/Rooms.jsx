@@ -4,11 +4,12 @@ import { useState } from 'react';
 import './Rooms.css';
 import { useQuery } from '@tanstack/react-query';
 import useAxios from '../../hooks/useAxios';
-import loading from '../../assets/animations/loading.json';
+
 import notFound from '../../assets/animations/notFound.json';
 import RoomCard from '../../components/RoomCard';
 import Pagination from '../../components/Pagination';
 import Lottie from 'lottie-react';
+import Loading from '../../components/shared/Loading';
 
 const Rooms = () => {
 	const [sortingOrder, setSortingOrder] = useState(-1);
@@ -89,9 +90,9 @@ const Rooms = () => {
 						</div>
 					</div>
 					{isLoading ? (
-						<div className="col-span-12 md:col-span-8 ">
-							<Lottie animationData={loading}></Lottie>
-						</div>
+						<>
+							<Loading />
+						</>
 					) : isError ? (
 						<div className="col-span-12 md:col-span-8 ">
 							<Lottie animationData={notFound} loop={false}></Lottie>
