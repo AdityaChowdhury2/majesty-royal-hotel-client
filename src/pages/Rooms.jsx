@@ -1,8 +1,10 @@
+import PageHeader from '../components/shared/PageHeader';
+
 const Rooms = () => {
 	return (
-		<div>
-			<p> Hello I Am Rooms </p>
-		</div>
+		<>
+			<PageHeader title={'Choose Room'} />
+		</>
 	);
 };
 
