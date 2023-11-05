@@ -9,12 +9,14 @@ import { Link } from 'react-router-dom';
 import MyNavbar from '../components/MyNavbar';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../hooks/useAuth';
-import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
+import useAxios from '../hooks/useAxios';
 
 const Register = () => {
-	const { createUser, updateUser } = useAuth();
+	const { createUser, user, updateUser, setUser } = useAuth();
 	const [isShowPassword, setIsShowPassword] = useShowPassword();
 	const [userForm, setUserForm] = useState();
+	const secureAxios = useAxios();
 
 	const handleInputField = e => {
 		setUserForm({ ...userForm, [e.target.name]: e.target.value });
@@ -23,26 +25,27 @@ const Register = () => {
 	const handleFormSubmit = e => {
 		e.preventDefault();
 		console.log(userForm);
+		const fullName =
+			userForm.firstName.toUpperCase() + ' ' + userForm.lastName.toUpperCase();
 		createUser(userForm)
-			.then(() => {
-				updateUser(userForm)
+			.then(res => {
+				console.log(res.user);
+				updateUser({
+					displayName: fullName,
+				})
 					.then(() => {
-						Swal.fire({
-							position: 'top-end',
-							icon: 'success',
-							text: 'User Registration Completed',
-							showConfirmButton: false,
-							timer: 1500,
+						setUser({ ...user, email: res.user.email, displayName: fullName });
+						secureAxios.post('/api/v1/users', {
+							email: res.user.email,
+							displayName: fullName,
+							photoURL: res.user.photoURL,
 						});
+						toast.success('User Registration completed Successfully!');
 					})
 					.catch(err => console.log(err));
 			})
 			.catch(() => {
-				Swal.fire({
-					icon: 'error',
-					title: 'Oops...',
-					text: 'Something went wrong!',
-				});
+				toast.error('OOPS! Something went wrong.');
 			});
 	};
 
@@ -63,7 +66,9 @@ const Register = () => {
 						</div>
 						<div className="w-full md:w-1/2 py-10 px-5 md:px-10">
 							<div className="text-center mb-10">
-								<h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
+								<h1 className="font-bold text-3xl text-gray-900 font-gilda-display">
+									REGISTER
+								</h1>
 								<p>Enter your information to register</p>
 							</div>
 							<form onSubmit={handleFormSubmit}>

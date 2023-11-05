@@ -2,7 +2,7 @@ import axios from 'axios';
 import useAuth from './useAuth';
 
 const secureAxios = axios.create({
-	baseURL: 'https://api.example.com',
+	baseURL: 'http://localhost:5000',
 	withCredentials: true,
 });
 
@@ -16,7 +16,7 @@ const useAxios = () => {
 			logOut();
 		}
 	);
-	return;
+	return secureAxios;
 };
 
 export default useAxios;

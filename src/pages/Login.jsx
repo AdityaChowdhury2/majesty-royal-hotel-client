@@ -9,16 +9,22 @@ import SocialLogin from '../components/shared/SocialLogin';
 
 import MyNavbar from '../components/MyNavbar';
 import { Helmet } from 'react-helmet-async';
+import useAuth from '../hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const Login = () => {
 	const [isShowPassword, setIsShowPassword] = useShowPassword();
 	const [userForm, setUserForm] = useState({});
+	const { loginUser } = useAuth();
 	const handleInputField = e => {
 		setUserForm({ ...userForm, [e.target.name]: e.target.value });
 	};
 	const handleFormSubmit = e => {
 		e.preventDefault();
 		console.log(userForm);
+		loginUser(userForm).then(() => {
+			toast.success('login successful');
+		});
 	};
 
 	return (
