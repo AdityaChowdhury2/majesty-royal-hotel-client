@@ -10,7 +10,6 @@ const CustomToast = () => {
 		}, 3000);
 		return () => clearTimeout(timer);
 	}, [message, setMessage]);
-	console.log(message);
 	return (
 		<>
 			{message ? (

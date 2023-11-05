@@ -6,13 +6,11 @@ import toast from 'react-hot-toast';
 
 const MyNavbar = () => {
 	const { user, logOut } = useAuth();
-
 	const handleLogOut = () => {
 		logOut().then(() => {
 			toast.success('User logged out');
 		});
 	};
-
 	return (
 		<>
 			<div className="bg-[#D9D9D9]">
@@ -29,11 +27,7 @@ const MyNavbar = () => {
 								arrowIcon={false}
 								inline
 								label={
-									<Avatar
-										alt="User settings"
-										img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-										rounded
-									/>
+									<Avatar alt="User settings" img={user.photoURL} rounded />
 								}
 							>
 								<Dropdown.Header>
@@ -65,7 +59,7 @@ const MyNavbar = () => {
 							Rooms
 						</Link>
 						<Link
-							to={'/myBookings'}
+							to={'/bookings'}
 							className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 md:border-0 md:hover:bg-transparent md:hover:text-[#C19B76]"
 						>
 							Bookings
