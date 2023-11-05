@@ -11,7 +11,7 @@ import Pagination from '../../components/Pagination';
 import Lottie from 'lottie-react';
 
 const Rooms = () => {
-	const [sortingOrder, setSortingOrder] = useState(1);
+	const [sortingOrder, setSortingOrder] = useState(-1);
 	const [priceRange, setPriceRange] = useState(550);
 	const [currentPage, setCurrentPage] = useState(0);
 	const axiosSecure = useAxios();
@@ -98,7 +98,7 @@ const Rooms = () => {
 						</div>
 					) : (
 						<div className="col-span-12 xl:col-span-8">
-							<div className="grid grid-cols-1 md:grid-cols-2 ">
+							<div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-5">
 								{rooms.map(room => (
 									<RoomCard key={room._id} room={room} />
 								))}
