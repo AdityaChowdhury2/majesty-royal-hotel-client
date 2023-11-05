@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import accessAccount from '../assets/images/accessAccount.svg';
 import useShowPassword from '../hooks/useShowPassword';
 import { AiOutlineMail } from 'react-icons/ai';
@@ -12,12 +12,11 @@ import { Helmet } from 'react-helmet-async';
 import useAuth from '../hooks/useAuth';
 // import toast from 'react-hot-toast';
 import useAxios from '../hooks/useAxios';
-
-import { ToastContext } from '../providers/ToastProviders';
+import useCustomToast from '../hooks/useCustomToast';
 
 const Login = () => {
 	const [isShowPassword, setIsShowPassword] = useShowPassword();
-	const { setMessage } = useContext(ToastContext);
+	const { setMessage } = useCustomToast();
 	const [userForm, setUserForm] = useState({});
 	const secureAxios = useAxios();
 	const { loginUser } = useAuth();
