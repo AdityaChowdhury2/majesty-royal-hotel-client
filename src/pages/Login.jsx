@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import accessAccount from '../assets/images/accessAccount.svg';
 import useShowPassword from '../hooks/useShowPassword';
 import { AiOutlineMail } from 'react-icons/ai';
@@ -10,11 +10,15 @@ import SocialLogin from '../components/shared/SocialLogin';
 import MyNavbar from '../components/MyNavbar';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../hooks/useAuth';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 import useAxios from '../hooks/useAxios';
+
+import { ToastContext } from '../providers/ToastProviders';
 
 const Login = () => {
 	const [isShowPassword, setIsShowPassword] = useShowPassword();
+	const { setMessage } = useContext(ToastContext);
+
 	const [userForm, setUserForm] = useState({});
 	const secureAxios = useAxios();
 	const { loginUser } = useAuth();
@@ -25,7 +29,8 @@ const Login = () => {
 		e.preventDefault();
 		console.log(userForm);
 		loginUser(userForm).then(res => {
-			toast.success('login successful');
+			// toast.success('login successful');
+			setMessage('login successful');
 			secureAxios
 				.post('/api/v1/user/create-token', { email: res.user.email })
 				.then(res => {
