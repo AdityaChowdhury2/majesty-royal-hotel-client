@@ -19,7 +19,7 @@ const MyNavbar = () => {
 				<Navbar fluid rounded className="container bg-transparent">
 					<Navbar.Brand href="/">
 						<Logo />
-						<span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+						<span className="self-center whitespace-nowrap text-xl md:text-3xl font-semibold font-gilda-display dark:text-white">
 							Majesty Royal
 						</span>
 					</Navbar.Brand>

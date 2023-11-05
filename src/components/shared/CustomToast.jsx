@@ -14,7 +14,7 @@ const CustomToast = () => {
 	return (
 		<>
 			{message ? (
-				<div className="absolute top-5 right-1/2 p-3 bg-[#C19B76] rounded flex gap-3 items-center text-white">
+				<div className="absolute top-5 right-[42%] p-3 bg-[#C19B76] rounded flex gap-3 items-center text-white">
 					<FcOk size={24} />
 					<p>{message}</p>
 				</div>
