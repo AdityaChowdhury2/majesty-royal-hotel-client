@@ -27,7 +27,7 @@ const Login = () => {
 		loginUser(userForm).then(res => {
 			toast.success('login successful');
 			secureAxios
-				.post('/api/v1/create-token', { email: res.user.email })
+				.post('/api/v1/user/create-token', { email: res.user.email })
 				.then(res => {
 					console.log(res.data.message);
 				})

@@ -10,6 +10,7 @@ import {
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
 import auth from '../config/firebase.config';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -19,11 +20,38 @@ const AuthProvider = ({ children }) => {
 
 	useEffect(() => {
 		const unSubscribe = onAuthStateChanged(auth, currentUser => {
-			setLoading(false);
-			setUser(currentUser);
+			const loggedUser = currentUser?.email || user?.email;
+			if (loggedUser) {
+				setLoading(false);
+				axios
+					.post(
+						'http://localhost:5000/api/v1/user/create-token',
+						{
+							email: loggedUser,
+						},
+						{ withCredentials: true }
+					)
+					.then(res => {
+						console.log(res.data.message);
+					})
+					.catch(err => console.log(err));
+				setUser(currentUser);
+			} else {
+				axios
+					.post(
+						'http://localhost:5000/api/v1/user/logout',
+						{
+							email: loggedUser,
+						},
+						{ withCredentials: true }
+					)
+					.then(res => {
+						console.log(res.data.message);
+					});
+			}
 		});
 		return () => unSubscribe();
-	}, []);
+	}, [user?.email]);
 
 	const googleLogin = () => {
 		const googleProvider = new GoogleAuthProvider();

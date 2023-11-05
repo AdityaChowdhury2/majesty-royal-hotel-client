@@ -36,7 +36,7 @@ const Register = () => {
 					.then(() => {
 						setUser({ ...user, email: res.user.email, displayName: fullName });
 						secureAxios
-							.post('/api/v1/users', {
+							.post('/api/v1/user', {
 								email: res.user.email,
 								displayName: fullName,
 								photoURL: res.user.photoURL,
@@ -47,12 +47,7 @@ const Register = () => {
 								console.log(err);
 								toast.error('User not Added in our database');
 							});
-						secureAxios
-							.post('/api/v1/create-token', { email: res.user.email })
-							.then(res => {
-								console.log(res.data.message);
-							})
-							.catch(err => console.log(err));
+
 						toast.success('User Registration completed Successfully!');
 					})
 					.catch(err => console.log(err));
