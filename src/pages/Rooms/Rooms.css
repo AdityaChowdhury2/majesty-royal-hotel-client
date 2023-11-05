@@ -1,0 +1,4 @@
+div div select:focus {
+    border: transparent;
+    box-shadow: none;
+}
