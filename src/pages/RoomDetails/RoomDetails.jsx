@@ -7,11 +7,16 @@ import BookingFormModal from '../../components/BookingFormModal';
 import ReactStars from 'react-rating-star-with-type';
 import { useState } from 'react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
+import useAuth from '../../hooks/useAuth';
 
 const RoomDetails = () => {
 	const axiosSecure = useAxios();
 	const { roomId } = useParams();
-	const [rating, setRating] = useState(0);
+	const { user } = useAuth();
+	const [review, setReview] = useState({
+		userEmail: user?.email,
+		roomId,
+	});
 	const [openBookingModal, setOpenBookingModal] = useState(false);
 	function onCloseModal() {
 		setOpenBookingModal(false);
@@ -29,7 +34,6 @@ const RoomDetails = () => {
 			return response.data;
 		},
 	});
-	console.log(room);
 	const {
 		images,
 		price,
@@ -41,6 +45,13 @@ const RoomDetails = () => {
 		thumbnailImage,
 		_id,
 	} = room || {};
+	const handlePostReview = async e => {
+		e.preventDefault();
+		// console.log(review);
+		const response = await axiosSecure.post(`/api/v1/review`, review);
+		console.log(response.data);
+		e.target.reset();
+	};
 	console.log(images);
 	const today = new Date();
 	const month = today.getMonth();
@@ -147,7 +158,7 @@ const RoomDetails = () => {
 										<p>Romm is very fine</p>
 									</div>
 								</div>
-								<form className="mt-10 space-y-4">
+								<form onSubmit={handlePostReview} className="mt-10 space-y-4">
 									<h3>Give a review: </h3>
 									<div>
 										<label className="block mb-2 text-sm font-medium">
@@ -155,26 +166,32 @@ const RoomDetails = () => {
 										</label>
 										<div>
 											<ReactStars
+												value={review?.rating}
 												emptyIcon={<BsStar size={24} />}
 												halfIcon={<BsStarHalf size={24} />}
 												filledIcon={<BsStarFill size={24} />}
 												isHalf
 												isEdit
-												onChange={value => setRating(value)}
+												onChange={value =>
+													setReview({ ...review, rating: value })
+												}
 											/>
 										</div>
 									</div>
 									<div className="sm:col-span-2">
 										<label
-											htmlFor="description"
+											htmlFor="comment"
 											className="block mb-2 text-sm font-medium "
 										>
-											Description
+											Comment
 										</label>
 										<textarea
-											id="description"
-											name="description"
+											id="comment"
+											name="comment"
 											rows="8"
+											onBlur={e => {
+												setReview({ ...review, comment: e.target.value });
+											}}
 											className="block p-2.5  text-sm rounded-lg border w-full bg-zinc-200 border-gray-300 
 								focus:outline-gray-300 focus:outline-2 focus:outline-offset-2"
 											placeholder="Write a comment here"
