@@ -7,21 +7,46 @@ import {
 	Datepicker,
 	Label,
 	Modal,
+	Select,
 	TextInput,
 } from 'flowbite-react';
 import { useState } from 'react';
+import moment from 'moment/moment';
+import useAuth from '../hooks/useAuth';
+import { useMutation } from '@tanstack/react-query';
+import useAxios from '../hooks/useAxios';
+import axios from 'axios';
 
 const BookingFormModal = ({ openBookingModal, room, onCloseModal }) => {
-	const [bookingDetails, setBookingDetails] = useState({});
 	const { price, roomName, seatsAvailable, specialOffer, _id } = room;
+	const { user } = useAuth();
+	const axiosSecure = useAxios();
+	const [bookingDetails, setBookingDetails] = useState({
+		uid: user.uid,
+		roomId: _id,
+		price,
+		date: moment().format('DD.MM.YYYY'),
+	});
+
+	const { mutate } = useMutation({
+		mutationFn: async data => {
+			const response = await axiosSecure.post('/api/v1/user/book-room', data);
+			return response.data();
+		},
+		// onError:
+		// onSuccess:
+	});
+
 	const handleBooking = e => {
 		e.preventDefault();
 		console.log(bookingDetails);
+		mutate(bookingDetails);
 	};
 	const calculatePriceAfterDiscount = price - (price * specialOffer) / 100;
 	const handleOnChange = e => {
 		setBookingDetails({ ...bookingDetails, [e.target.name]: e.target.value });
 	};
+
 	return (
 		<Modal
 			show={openBookingModal}
@@ -63,6 +88,27 @@ const BookingFormModal = ({ openBookingModal, room, onCloseModal }) => {
 					</div>
 					<div>
 						<div className="mb-2 block">
+							<Label htmlFor="seatsCount" value="Book Seats" />
+						</div>
+						<Select
+							id="seatsCount"
+							required
+							onChange={handleOnChange}
+							name="seatCount"
+						>
+							{[...Array(seatsAvailable).keys()].map((seat, idx) => (
+								<option key={idx} value={seat + 1}>
+									{seat + 1}
+								</option>
+							))}
+							{/* <option>United States</option>
+							<option>Canada</option>
+							<option>France</option>
+							<option>Germany</option> */}
+						</Select>
+					</div>
+					<div>
+						<div className="mb-2 block">
 							<Label htmlFor="price" value="Discounted price" />
 						</div>
 						<TextInput
@@ -90,7 +136,10 @@ const BookingFormModal = ({ openBookingModal, room, onCloseModal }) => {
 							minDate={new Date()}
 							showClearButton={false}
 							onSelectedDateChanged={date => {
-								setBookingDetails({ ...bookingDetails, date });
+								setBookingDetails({
+									...bookingDetails,
+									date: moment(date).format('DD.MM.YYYY'),
+								});
 							}}
 							defaultDate={new Date()}
 							theme={{
