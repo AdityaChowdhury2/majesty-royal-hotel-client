@@ -37,6 +37,7 @@ const AuthProvider = ({ children }) => {
 					.catch(err => console.log(err));
 				setUser(currentUser);
 			} else {
+				console.log('why man');
 				axios
 					.post(
 						'http://localhost:5000/api/v1/user/logout',

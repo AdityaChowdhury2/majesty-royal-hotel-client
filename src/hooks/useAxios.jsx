@@ -13,6 +13,7 @@ const useAxios = () => {
 			return response;
 		},
 		() => {
+			console.log('logout completed');
 			logOut();
 		}
 	);

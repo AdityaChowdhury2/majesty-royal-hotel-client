@@ -2,15 +2,19 @@ import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import useAxios from '../../hooks/useAxios';
 import useCustomToast from '../../hooks/useCustomToast';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SocialLogin = () => {
 	const { googleLogin } = useAuth();
+	const navigate = useNavigate();
+	const location = useLocation();
 	const axiosSecure = useAxios();
 	const { setMessage } = useCustomToast();
 	const handleGoogleLogin = () => {
 		googleLogin()
 			.then(res => {
 				setMessage('Successfully logged in');
+				navigate(location.state || '/', { replace: true });
 				axiosSecure
 					.post('/api/v1/user', {
 						email: res.user.email,

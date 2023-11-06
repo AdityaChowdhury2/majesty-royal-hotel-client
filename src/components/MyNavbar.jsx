@@ -11,6 +11,7 @@ const MyNavbar = () => {
 			toast.success('User logged out');
 		});
 	};
+	console.log(user);
 	return (
 		<>
 			<div className="bg-[#D9D9D9]">
@@ -27,7 +28,7 @@ const MyNavbar = () => {
 								arrowIcon={false}
 								inline
 								label={
-									<Avatar alt="User settings" img={user.photoURL} rounded />
+									<Avatar alt="User settings" img={user?.photoURL} rounded />
 								}
 							>
 								<Dropdown.Header>

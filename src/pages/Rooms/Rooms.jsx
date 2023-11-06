@@ -90,9 +90,9 @@ const Rooms = () => {
 						</div>
 					</div>
 					{isLoading ? (
-						<>
+						<div className="col-span-12 md:col-span-8 ">
 							<Loading />
-						</>
+						</div>
 					) : isError ? (
 						<div className="col-span-12 md:col-span-8 ">
 							<Lottie animationData={notFound} loop={false}></Lottie>

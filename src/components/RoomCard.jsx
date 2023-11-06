@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const RoomCard = ({ room }) => {
-	const { _id, roomName, specialOffer, thumbnailImage, price } = room;
+	const { _id, roomName, specialOffer, thumbnailImage, price, seatsAvailable } =
+		room;
+
 	return (
 		<Link to={`/room/${_id}`}>
 			<div className="w-full max-w-sm bg-zinc-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
@@ -32,6 +34,11 @@ const RoomCard = ({ room }) => {
 							${price}
 						</span>
 					</div>
+					{seatsAvailable ? (
+						<p>{seatsAvailable}&apos;s Seat</p>
+					) : (
+						<p>No seats available</p>
+					)}
 				</div>
 			</div>
 		</Link>
