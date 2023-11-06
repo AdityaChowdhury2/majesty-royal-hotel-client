@@ -10,7 +10,7 @@ const RoomCard = ({ room }) => {
 			<div className="w-full max-w-sm bg-zinc-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
 				<div className="relative overflow-hidden rounded-t-md ">
 					<img
-						className="p-8 md:min-h-[276px] hover:scale-150 duration-700 ease-in-out rounded-md "
+						className="p-8 md:max-h-[276px] hover:scale-150 duration-700 ease-in-out rounded-md "
 						src={thumbnailImage}
 						alt={`${roomName}'s image`}
 					/>

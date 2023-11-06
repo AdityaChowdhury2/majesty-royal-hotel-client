@@ -19,6 +19,7 @@ const RoomDetails = () => {
 		data: room,
 		isLoading,
 		isError,
+		refetch,
 	} = useQuery({
 		queryKey: ['room'],
 		queryFn: async () => {
@@ -87,6 +88,7 @@ const RoomDetails = () => {
 									<p className="text-gray-700 text-justify">
 										{roomDescription}
 									</p>
+									<h1 className="text-4xl">{seatsAvailable}</h1>
 								</div>
 							</div>
 							<div className="col-span-12 md:col-span-4 ">
@@ -119,6 +121,7 @@ const RoomDetails = () => {
 										</button>
 										<BookingFormModal
 											room={room}
+											refetch={refetch}
 											openBookingModal={openBookingModal}
 											onCloseModal={onCloseModal}
 										/>
