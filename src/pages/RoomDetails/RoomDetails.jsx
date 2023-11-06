@@ -4,15 +4,17 @@ import { useParams } from 'react-router-dom';
 import { Avatar, Carousel } from 'flowbite-react';
 import Loading from '../../components/shared/Loading';
 import BookingFormModal from '../../components/BookingFormModal';
+import ReactStars from 'react-rating-star-with-type';
 import { useState } from 'react';
+import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 
 const RoomDetails = () => {
 	const axiosSecure = useAxios();
 	const { roomId } = useParams();
+	const [rating, setRating] = useState(0);
 	const [openBookingModal, setOpenBookingModal] = useState(false);
 	function onCloseModal() {
 		setOpenBookingModal(false);
-		setEmail('');
 	}
 
 	const {
@@ -132,10 +134,10 @@ const RoomDetails = () => {
 								<h4 className="my-2 font-gilda-display text-3xl">
 									User Reviews :
 								</h4>
-								<div>
+								{/* <div>
 									<p className="text-red-500">No review Found</p>
-								</div>
-								{/* <div className="bg-neutral-200 drop-shadow-lg rounded-lg flex p-5 gap-4">
+								</div> */}
+								<div className="bg-neutral-200 drop-shadow-lg rounded-lg flex p-5 gap-4">
 									<Avatar alt="User settings" img={''} rounded />
 									<div className="flex  flex-col">
 										<p className="text-sm space-x-4">
@@ -144,7 +146,44 @@ const RoomDetails = () => {
 										</p>
 										<p>Romm is very fine</p>
 									</div>
-								</div> */}
+								</div>
+								<form className="mt-10 space-y-4">
+									<h3>Give a review: </h3>
+									<div>
+										<label className="block mb-2 text-sm font-medium">
+											Rating
+										</label>
+										<div>
+											<ReactStars
+												emptyIcon={<BsStar size={24} />}
+												halfIcon={<BsStarHalf size={24} />}
+												filledIcon={<BsStarFill size={24} />}
+												isHalf
+												isEdit
+												onChange={value => setRating(value)}
+											/>
+										</div>
+									</div>
+									<div className="sm:col-span-2">
+										<label
+											htmlFor="description"
+											className="block mb-2 text-sm font-medium "
+										>
+											Description
+										</label>
+										<textarea
+											id="description"
+											name="description"
+											rows="8"
+											className="block p-2.5  text-sm rounded-lg border w-full bg-zinc-200 border-gray-300 
+								focus:outline-gray-300 focus:outline-2 focus:outline-offset-2"
+											placeholder="Write a comment here"
+										></textarea>
+									</div>
+									<button className="text-white bg-[#C19B76] hover:bg-[#b89470] focus:bg-[#C19B76] px-3 py-1 rounded-md">
+										Submit
+									</button>
+								</form>
 							</div>
 						</div>
 					</section>
