@@ -1,15 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 import Testimonial from '../components/Testimonial';
+import Banner from '../components/Banner';
+import Pricing from '../components/Pricing';
 
 const Home = () => {
 	return (
-		<div>
+		<>
 			<Helmet>
 				<title>Majesty Royal || Home</title>
 			</Helmet>
-			<p> Hello I Am Home </p>
+			<Banner />
+			<Pricing />
 			<Testimonial />
-		</div>
+		</>
 	);
 };
 

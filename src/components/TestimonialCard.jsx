@@ -1,10 +1,11 @@
 import { Avatar } from 'flowbite-react';
 import PropTypes from 'prop-types';
+import { AiTwotoneStar } from 'react-icons/ai';
 
 const TestimonialCard = ({ review }) => {
 	const { photoURL, userName, rating, comment } = review;
 	return (
-		<div className="flex flex-col w-full d mx-4 my-6">
+		<div className="flex flex-col mx-4 my-6">
 			<div className="bg-neutral-50 drop-shadow-lg">
 				<div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 ">
 					<p className="relative px-6 py-1 text-lg italic text-center dark:text-gray-100">
@@ -31,8 +32,13 @@ const TestimonialCard = ({ review }) => {
 				</div>
 				<div className="flex flex-col items-center justify-center p-8 rounded-b-lg space-y-3">
 					<Avatar img={photoURL} alt="avatar of Jese" rounded />
-					<p className="text-xl font-semibold leadi">Distinctio Animi</p>
-					<p className="text-sm uppercase">Aliquam illum</p>
+					<p className="text-xl font-semibold leadi">{userName}</p>
+					<p className="flex items-center gap-1 text-xl">
+						{rating}{' '}
+						<span>
+							<AiTwotoneStar className="text-yellow-300" />
+						</span>
+					</p>
 				</div>
 			</div>
 		</div>
