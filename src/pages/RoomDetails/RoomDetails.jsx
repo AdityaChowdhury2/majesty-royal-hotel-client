@@ -1,31 +1,49 @@
 import { useQuery } from '@tanstack/react-query';
 import useAxios from '../../hooks/useAxios';
 import { useParams } from 'react-router-dom';
-import { Avatar, Carousel } from 'flowbite-react';
+import { Carousel } from 'flowbite-react';
 import Loading from '../../components/shared/Loading';
 import BookingFormModal from '../../components/BookingFormModal';
 import ReactStars from 'react-rating-star-with-type';
 import { useState } from 'react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import useAuth from '../../hooks/useAuth';
+import ReviewCard from '../../components/ReviewCard';
 
 const RoomDetails = () => {
 	const axiosSecure = useAxios();
 	const { roomId } = useParams();
 	const { user } = useAuth();
-	const [review, setReview] = useState({
+	const initialReview = {
 		userEmail: user?.email,
+		photoURL: user?.photoURL || '',
+		userName: user?.displayName || '',
+		uid: user?.uid,
 		roomId,
-	});
+		rating: 0,
+		comment: '',
+	};
+	const [review, setReview] = useState(initialReview);
+	const [isReviewSubmitted, setIsReviewSubmitted] = useState(false);
 	const [openBookingModal, setOpenBookingModal] = useState(false);
 	function onCloseModal() {
 		setOpenBookingModal(false);
 	}
 
+	const { data: reviews } = useQuery({
+		queryKey: ['review', isReviewSubmitted],
+		queryFn: async () => {
+			const response = await axiosSecure.get(
+				`/api/v1/reviews/?roomId=${roomId}`
+			);
+			return response.data;
+		},
+	});
+
 	const {
 		data: room,
 		isLoading,
-		isError,
+
 		refetch,
 	} = useQuery({
 		queryKey: ['room'],
@@ -39,24 +57,24 @@ const RoomDetails = () => {
 		price,
 		roomDescription,
 		roomName,
-		roomSize,
 		seatsAvailable,
 		specialOffer,
 		thumbnailImage,
-		_id,
 	} = room || {};
 	const handlePostReview = async e => {
 		e.preventDefault();
-		// console.log(review);
+
 		const response = await axiosSecure.post(`/api/v1/review`, review);
-		console.log(response.data);
-		e.target.reset();
+
+		if (response.data.acknowledged) {
+			e.target.reset();
+			setIsReviewSubmitted(true);
+			setReview(initialReview);
+		}
 	};
-	console.log(images);
-	const today = new Date();
-	const month = today.getMonth();
-	const date = today.getDate();
-	const year = today.getFullYear();
+
+	// console.log(images);
+
 	return (
 		<>
 			{isLoading ? (
@@ -145,36 +163,39 @@ const RoomDetails = () => {
 								<h4 className="my-2 font-gilda-display text-3xl">
 									User Reviews :
 								</h4>
-								{/* <div>
-									<p className="text-red-500">No review Found</p>
-								</div> */}
-								<div className="bg-neutral-200 drop-shadow-lg rounded-lg flex p-5 gap-4">
-									<Avatar alt="User settings" img={''} rounded />
-									<div className="flex  flex-col">
-										<p className="text-sm space-x-4">
-											<span>User</span>
-											<span>{`${date}/${month}/${year}`}</span>
-										</p>
-										<p>Romm is very fine</p>
+								{reviews.length > 0 ? (
+									<div className="space-y-4">
+										{reviews.map(rev => (
+											<ReviewCard key={rev._id} review={rev} />
+										))}
 									</div>
-								</div>
+								) : (
+									<div>
+										<p className="text-red-500">No review Found</p>
+									</div>
+								)}
+								{/* */}
+
 								<form onSubmit={handlePostReview} className="mt-10 space-y-4">
 									<h3>Give a review: </h3>
 									<div>
 										<label className="block mb-2 text-sm font-medium">
 											Rating
 										</label>
+
 										<div>
 											<ReactStars
-												value={review?.rating}
+												valueShow
+												value={review.rating}
 												emptyIcon={<BsStar size={24} />}
 												halfIcon={<BsStarHalf size={24} />}
 												filledIcon={<BsStarFill size={24} />}
 												isHalf
 												isEdit
-												onChange={value =>
-													setReview({ ...review, rating: value })
-												}
+												onChange={value => {
+													setIsReviewSubmitted(false);
+													setReview({ ...review, rating: value });
+												}}
 											/>
 										</div>
 									</div>
@@ -189,6 +210,7 @@ const RoomDetails = () => {
 											id="comment"
 											name="comment"
 											rows="8"
+											onFocus={() => setIsReviewSubmitted(false)}
 											onBlur={e => {
 												setReview({ ...review, comment: e.target.value });
 											}}

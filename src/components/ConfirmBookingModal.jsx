@@ -4,7 +4,6 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { Button, Modal } from 'flowbite-react';
-import moment from 'moment';
 
 const ConfirmBookingModal = ({
 	setOpenConfirmModal,
@@ -29,10 +28,11 @@ const ConfirmBookingModal = ({
 			toast.error('Booking error');
 		},
 	});
-
+	console.log(bookingDetails);
 	const handleBooking = async () => {
 		console.log(bookingDetails);
 		try {
+			console.log(bookingDetails);
 			await mutateAsync(bookingDetails);
 			axiosSecure
 				.patch(`/api/v1/room/${params.roomId}`, {
@@ -68,7 +68,7 @@ const ConfirmBookingModal = ({
 						</p>
 						<p className="text-xs">
 							<span className="font-bold">Booking Date:</span>{' '}
-							{moment(bookingDetails.date).format('YYYY-MM-DD')}
+							{bookingDetails.bookingDate}
 						</p>
 					</div>
 					<div className="flex justify-center gap-4 ">
