@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 const Pagination = ({ pages, setCurrentPage, currentPage }) => {
-	console.log(currentPage);
 	return (
 		<>
 			<ul className="inline-flex gap-4 text-sm">

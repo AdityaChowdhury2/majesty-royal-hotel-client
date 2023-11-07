@@ -33,12 +33,6 @@ const Login = () => {
 			.then(res => {
 				setMessage('login successful');
 				navigate(location.state || '/', { replace: true });
-				secureAxios
-					.post('/api/v1/user/create-token', { email: res.user.email })
-					.then(res => {
-						console.log(res.data.message);
-					})
-					.catch(err => console.log(err));
 			})
 			.catch(() => toast.error('Invalid User'));
 	};

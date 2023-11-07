@@ -11,7 +11,6 @@ const MyNavbar = () => {
 			toast.success('User logged out');
 		});
 	};
-	console.log(user);
 	return (
 		<>
 			<div className="bg-[#D9D9D9]">

@@ -15,28 +15,37 @@ import axios from 'axios';
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-	const [user, setUser] = useState();
+	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const unSubscribe = onAuthStateChanged(auth, currentUser => {
 			const loggedUser = currentUser?.email || user?.email;
 			setLoading(false);
+			setUser(currentUser);
+			console.log('AuthProvider:', loggedUser);
 			if (loggedUser) {
 				axios
-					.post('http://localhost:5000/api/v1/user/create-token', {
-						email: loggedUser,
-					})
+					.post(
+						'http://localhost:5000/api/v1/user/create-token',
+						{
+							email: loggedUser,
+						},
+						{ withCredentials: true }
+					)
 					.then(res => {
 						console.log(res.data.message);
 					})
 					.catch(err => console.log(err));
-				setUser(currentUser);
 			} else {
 				axios
-					.post('http://localhost:5000/api/v1/user/logout', {
-						email: loggedUser,
-					})
+					.post(
+						'http://localhost:5000/api/v1/user/logout',
+						{
+							email: loggedUser,
+						},
+						{ withCredentials: true }
+					)
 					.then(res => {
 						console.log(res.data.message);
 					})

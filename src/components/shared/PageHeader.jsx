@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 const PageHeader = ({ title }) => {
 	return (
 		<section className='bg-[url("http://www.nicdarkthemes.com/themes/hotel-booking/wp/demo/hotel/wp-content/uploads/sites/2/revslider/parallax-41.jpg")] bg-[#151515] bg-opacity-70 bg-blend-overlay bg-no-repeat bg-center relative'>
-			<div className="text-center pt-8 md:pt-24">
-				<h2 className="font-gilda-display text-5xl  text-neutral-200 pb-8 md:pb-24">
+			<div className="text-center pt-8 md:pt-40">
+				<h2 className="font-gilda-display text-5xl  text-neutral-200 pb-8 md:pb-40">
 					{title}
 				</h2>
-				{title !== 'Bookings' ? (
+				{title === 'Bookings' ? (
 					<ol className="justify-center items-center w-full gap-8 flex flex-wrap pb-4">
 						<li className="flex items-center text-neutral-200 space-x-2.5">
 							<span

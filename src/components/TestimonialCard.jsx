@@ -5,8 +5,8 @@ import { AiTwotoneStar } from 'react-icons/ai';
 const TestimonialCard = ({ review }) => {
 	const { photoURL, userName, rating, comment } = review;
 	return (
-		<div className="flex flex-col mx-4 my-6">
-			<div className="bg-neutral-50 drop-shadow-lg">
+		<div className="flex flex-col mx-4 my-6 ">
+			<div className="bg-neutral-50 drop-shadow-lg h-full">
 				<div className="px-4 py-12 rounded-t-lg sm:px-8 md:px-12 ">
 					<p className="relative px-6 py-1 text-lg italic text-center dark:text-gray-100">
 						<svg

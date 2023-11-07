@@ -22,7 +22,7 @@ const Testimonial = () => {
 	return (
 		<>
 			<section className="my-8 dark:bg-gray-800 dark:text-gray-100">
-				<div className="container flex flex-col items-center mx-auto mb-12 md:p-10 md:px-12">
+				<div className="container flex flex-col items-center mx-auto mb-5 md:mb-8 lg:mb-12 md:p-10 md:px-12">
 					<h1 className="p-4 text-xl md:text-2xl lg:text-4xl font-semibold  text-center">
 						What our customers are saying about us
 					</h1>

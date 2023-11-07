@@ -2,8 +2,8 @@ import { FcApproval } from 'react-icons/fc';
 
 const Pricing = () => {
 	return (
-		<section>
-			<div className="container flex flex-col items-center mx-auto mb-12 md:p-10 md:px-12">
+		<section className="mt-8">
+			<div className="container flex flex-col items-center mx-auto mb-5 md:mb-8 lg:mb-12 md:p-10 md:px-12">
 				<h1 className="p-4 text-xl md:text-2xl lg:text-4xl font-semibold  text-center">
 					Featured Room
 				</h1>
