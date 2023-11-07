@@ -24,31 +24,23 @@ const AuthProvider = ({ children }) => {
 			setLoading(false);
 			if (loggedUser) {
 				axios
-					.post(
-						'http://localhost:5000/api/v1/user/create-token',
-						{
-							email: loggedUser,
-						},
-						{ withCredentials: true }
-					)
+					.post('http://localhost:5000/api/v1/user/create-token', {
+						email: loggedUser,
+					})
 					.then(res => {
 						console.log(res.data.message);
 					})
 					.catch(err => console.log(err));
 				setUser(currentUser);
 			} else {
-				console.log('why man');
 				axios
-					.post(
-						'http://localhost:5000/api/v1/user/logout',
-						{
-							email: loggedUser,
-						},
-						{ withCredentials: true }
-					)
+					.post('http://localhost:5000/api/v1/user/logout', {
+						email: loggedUser,
+					})
 					.then(res => {
 						console.log(res.data.message);
-					});
+					})
+					.catch(err => console.log(err));
 			}
 		});
 		return () => unSubscribe();
