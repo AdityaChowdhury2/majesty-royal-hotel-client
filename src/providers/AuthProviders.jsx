@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
 			}
 		});
 		return () => unSubscribe();
-	}, [user?.email]);
+	}, [user]);
 
 	const googleLogin = () => {
 		const googleProvider = new GoogleAuthProvider();

@@ -12,9 +12,10 @@ const useAxios = () => {
 		response => {
 			return response;
 		},
-		() => {
-			console.log('logout completed');
-			logOut();
+		err => {
+			if (err.response.status === 401 || err.response.status === 403) {
+				logOut();
+			}
 		}
 	);
 	return secureAxios;

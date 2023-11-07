@@ -13,6 +13,7 @@ import useAuth from '../hooks/useAuth';
 // import toast from 'react-hot-toast';
 import useAxios from '../hooks/useAxios';
 import useCustomToast from '../hooks/useCustomToast';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -28,17 +29,18 @@ const Login = () => {
 	const handleFormSubmit = e => {
 		e.preventDefault();
 		console.log(userForm);
-		loginUser(userForm).then(res => {
-			// toast.success('login successful');
-			setMessage('login successful');
-			navigate(location.state || '/', { replace: true });
-			secureAxios
-				.post('/api/v1/user/create-token', { email: res.user.email })
-				.then(res => {
-					console.log(res.data.message);
-				})
-				.catch(err => console.log(err));
-		});
+		loginUser(userForm)
+			.then(res => {
+				setMessage('login successful');
+				navigate(location.state || '/', { replace: true });
+				secureAxios
+					.post('/api/v1/user/create-token', { email: res.user.email })
+					.then(res => {
+						console.log(res.data.message);
+					})
+					.catch(err => console.log(err));
+			})
+			.catch(() => toast.error('Invalid User'));
 	};
 	return (
 		<>

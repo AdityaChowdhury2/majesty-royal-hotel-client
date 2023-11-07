@@ -129,7 +129,11 @@ const RoomDetails = () => {
 									<Carousel>
 										{images?.map((image, idx) => (
 											<div key={idx}>
-												<img src={image} alt="" />
+												<img
+													src={image}
+													alt=""
+													className="rounded-full md:rounded-md"
+												/>
 											</div>
 										))}
 									</Carousel>
