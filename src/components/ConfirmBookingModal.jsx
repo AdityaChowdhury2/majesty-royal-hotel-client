@@ -9,7 +9,8 @@ const ConfirmBookingModal = ({
 	setOpenConfirmModal,
 	openConfirmModal,
 	bookingDetails,
-	refetch,
+	refetchBooking,
+	refetchRoom,
 	calculatePriceAfterDiscount,
 	room,
 }) => {
@@ -40,7 +41,8 @@ const ConfirmBookingModal = ({
 				})
 				.then(res => {
 					console.log(res);
-					refetch();
+					refetchBooking();
+					refetchRoom();
 				});
 		} catch (error) {
 			console.log(error);
@@ -95,7 +97,8 @@ ConfirmBookingModal.propTypes = {
 	setOpenConfirmModal: PropTypes.func,
 	openConfirmModal: PropTypes.bool,
 	bookingDetails: PropTypes.object,
-	refetch: PropTypes.func,
+	refetchBooking: PropTypes.func,
+	refetchRoom: PropTypes.func,
 	room: PropTypes.object,
 	calculatePriceAfterDiscount: PropTypes.number,
 };

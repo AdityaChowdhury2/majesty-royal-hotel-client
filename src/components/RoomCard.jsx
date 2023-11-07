@@ -2,15 +2,22 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const RoomCard = ({ room }) => {
-	const { _id, roomName, specialOffer, thumbnailImage, price, seatsAvailable } =
-		room;
+	const {
+		_id,
+		roomName,
+		specialOffer,
+		reviewCount = 0,
+		thumbnailImage,
+		price,
+		seatsAvailable,
+	} = room;
 
 	return (
-		<Link to={`/room/${_id}`}>
-			<div className="w-full max-w-sm bg-zinc-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
-				<div className="relative overflow-hidden rounded-t-md ">
+		<div className="w-full max-w-sm bg-zinc-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+			<Link to={`/room/${_id}`} className="w-full">
+				<div className="relative overflow-hidden rounded-t-md">
 					<img
-						className="p-8 md:max-h-[276px] hover:scale-150 duration-700 ease-in-out rounded-md "
+						className="p-8 w-full md:max-h-[276px] hover:scale-150 duration-700 ease-in-out rounded-md "
 						src={thumbnailImage}
 						alt={`${roomName}'s image`}
 					/>
@@ -27,12 +34,17 @@ const RoomCard = ({ room }) => {
 				</div>
 				<div className="px-5 pb-5">
 					<div className="flex items-center justify-between mt-5">
-						<span className="text-3xl font-bold text-gray-900 dark:text-white">
-							Review
-						</span>
+						{/* <span className="text-3xl font-bold text-gray-900 dark:text-white"> */}
+
+						{/* </span> */}
 						<span className="text-3xl font-bold text-gray-900 dark:text-white">
 							${price}
 						</span>
+						{reviewCount ? (
+							<p>{reviewCount}&apos;s Review</p>
+						) : (
+							<p>No Review found</p>
+						)}
 					</div>
 					{seatsAvailable ? (
 						<p>{seatsAvailable}&apos;s Seat</p>
@@ -40,8 +52,8 @@ const RoomCard = ({ room }) => {
 						<p>No seats available</p>
 					)}
 				</div>
-			</div>
-		</Link>
+			</Link>
+		</div>
 	);
 };
 

@@ -28,6 +28,7 @@ const Rooms = () => {
 	const roomsPerPage = 4;
 	const { data, isError, isLoading } = useQuery({
 		queryKey: ['rooms', sortingOrder, priceRange, currentPage],
+		keepPreviousData: true,
 		queryFn: async () => {
 			const response = await axiosSecure.get(
 				`/api/v1/room/?sortingOrder=${sortingOrder}&priceRange=${priceRange}&currentPage=${currentPage}`
@@ -41,7 +42,6 @@ const Rooms = () => {
 	if (total) {
 		pages = [...Array(Math.ceil(total / roomsPerPage)).keys()];
 	}
-
 	// console.log(pages);
 	return (
 		<>

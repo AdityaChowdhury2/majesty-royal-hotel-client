@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import useAxios from '../../hooks/useAxios';
 import { useParams } from 'react-router-dom';
 import { Carousel } from 'flowbite-react';
@@ -30,8 +30,8 @@ const RoomDetails = () => {
 		setOpenBookingModal(false);
 	}
 
-	const { data: reviews } = useQuery({
-		queryKey: ['review', isReviewSubmitted],
+	const { data: reviews, refetch: refetchReviews } = useQuery({
+		queryKey: ['review', isReviewSubmitted, roomId],
 		queryFn: async () => {
 			const response = await axiosSecure.get(
 				`/api/v1/reviews/?roomId=${roomId}`
@@ -40,13 +40,29 @@ const RoomDetails = () => {
 		},
 	});
 
+	const { mutate: updateReview } = useMutation({
+		mutationFn: async data => {
+			const response = await axiosSecure.patch(`/api/v1/room/${roomId}`, data);
+			return response.data;
+		},
+	});
+
+	const { data: isBookedByUser, refetch: refetchBooking } = useQuery({
+		queryKey: ['bookingsLength', user.uid],
+		queryFn: async () => {
+			const response = await axiosSecure.get(
+				`/api/v1/bookings/?uid=${user.uid}`
+			);
+			return response.data.length;
+		},
+	});
+
 	const {
 		data: room,
 		isLoading,
-
-		refetch,
+		refetch: refetchRoom,
 	} = useQuery({
-		queryKey: ['room'],
+		queryKey: ['room', roomId],
 		queryFn: async () => {
 			const response = await axiosSecure.get(`/api/v1/room/${roomId}`);
 			return response.data;
@@ -60,6 +76,7 @@ const RoomDetails = () => {
 		seatsAvailable,
 		specialOffer,
 		thumbnailImage,
+		roomSize,
 	} = room || {};
 	const handlePostReview = async e => {
 		e.preventDefault();
@@ -70,6 +87,8 @@ const RoomDetails = () => {
 			e.target.reset();
 			setIsReviewSubmitted(true);
 			setReview(initialReview);
+			refetchReviews();
+			updateReview({ reviewCount: reviews.length });
 		}
 	};
 
@@ -119,7 +138,18 @@ const RoomDetails = () => {
 									<p className="text-gray-700 text-justify">
 										{roomDescription}
 									</p>
-									<h1 className="text-4xl">{seatsAvailable}</h1>
+									<div className="mt-5">
+										<p>Room Size: {roomSize}</p>
+										<p>
+											Seat&apos;s Available:{' '}
+											{seatsAvailable ? (
+												<>{seatsAvailable}&apos;s seats</>
+											) : (
+												'No Seats Available'
+											)}
+										</p>
+									</div>
+									{/* <h1 className="text-4xl">{seatsAvailable}</h1> */}
 								</div>
 							</div>
 							<div className="col-span-12 md:col-span-4 ">
@@ -152,7 +182,8 @@ const RoomDetails = () => {
 										</button>
 										<BookingFormModal
 											room={room}
-											refetch={refetch}
+											refetchRoom={refetchRoom}
+											refetchBooking={refetchBooking}
 											openBookingModal={openBookingModal}
 											onCloseModal={onCloseModal}
 										/>
@@ -176,53 +207,57 @@ const RoomDetails = () => {
 								)}
 								{/* */}
 
-								<form onSubmit={handlePostReview} className="mt-10 space-y-4">
-									<h3>Give a review: </h3>
-									<div>
-										<label className="block mb-2 text-sm font-medium">
-											Rating
-										</label>
-
+								{isBookedByUser ? (
+									<form onSubmit={handlePostReview} className="mt-10 space-y-4">
+										<h3>Give a review: </h3>
 										<div>
-											<ReactStars
-												valueShow
-												value={review.rating}
-												emptyIcon={<BsStar size={24} />}
-												halfIcon={<BsStarHalf size={24} />}
-												filledIcon={<BsStarFill size={24} />}
-												isHalf
-												isEdit
-												onChange={value => {
-													setIsReviewSubmitted(false);
-													setReview({ ...review, rating: value });
-												}}
-											/>
+											<label className="block mb-2 text-sm font-medium">
+												Rating
+											</label>
+
+											<div>
+												<ReactStars
+													valueShow
+													value={review.rating}
+													emptyIcon={<BsStar size={24} />}
+													halfIcon={<BsStarHalf size={24} />}
+													filledIcon={<BsStarFill size={24} />}
+													isHalf
+													isEdit
+													onChange={value => {
+														setIsReviewSubmitted(false);
+														setReview({ ...review, rating: value });
+													}}
+												/>
+											</div>
 										</div>
-									</div>
-									<div className="sm:col-span-2">
-										<label
-											htmlFor="comment"
-											className="block mb-2 text-sm font-medium "
-										>
-											Comment
-										</label>
-										<textarea
-											id="comment"
-											name="comment"
-											rows="8"
-											onFocus={() => setIsReviewSubmitted(false)}
-											onBlur={e => {
-												setReview({ ...review, comment: e.target.value });
-											}}
-											className="block p-2.5  text-sm rounded-lg border w-full bg-zinc-200 border-gray-300 
-								focus:outline-gray-300 focus:outline-2 focus:outline-offset-2"
-											placeholder="Write a comment here"
-										></textarea>
-									</div>
-									<button className="text-white bg-[#C19B76] hover:bg-[#b89470] focus:bg-[#C19B76] px-3 py-1 rounded-md">
-										Submit
-									</button>
-								</form>
+										<div className="sm:col-span-2">
+											<label
+												htmlFor="comment"
+												className="block mb-2 text-sm font-medium "
+											>
+												Comment
+											</label>
+											<textarea
+												id="comment"
+												name="comment"
+												rows="8"
+												onFocus={() => setIsReviewSubmitted(false)}
+												onBlur={e => {
+													setReview({ ...review, comment: e.target.value });
+												}}
+												className="block p-2.5  text-sm rounded-lg border w-full bg-zinc-200 border-gray-300 
+							focus:outline-gray-300 focus:outline-2 focus:outline-offset-2"
+												placeholder="Write a comment here"
+											></textarea>
+										</div>
+										<button className="text-white bg-[#C19B76] hover:bg-[#b89470] focus:bg-[#C19B76] px-3 py-1 rounded-md">
+											Submit
+										</button>
+									</form>
+								) : (
+									<></>
+								)}
 							</div>
 						</div>
 					</section>

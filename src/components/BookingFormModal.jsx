@@ -10,10 +10,11 @@ import useAxios from '../hooks/useAxios';
 import toast from 'react-hot-toast';
 
 const BookingFormModal = ({
-	refetch,
+	refetchRoom,
 	openBookingModal,
 	room,
 	onCloseModal,
+	refetchBooking,
 }) => {
 	const [openConfirmModal, setOpenConfirmModal] = useState(false);
 	const { price, roomName, seatsAvailable, specialOffer, _id } = room;
@@ -210,7 +211,8 @@ const BookingFormModal = ({
 						</button>
 						<ConfirmBookingModal
 							bookingDetails={bookingDetails}
-							refetch={refetch}
+							refetchRoom={refetchRoom}
+							refetchBooking={refetchBooking}
 							openConfirmModal={openConfirmModal}
 							setOpenConfirmModal={setOpenConfirmModal}
 							room={room}
@@ -227,7 +229,8 @@ BookingFormModal.propTypes = {
 	onCloseModal: PropTypes.func,
 	openBookingModal: PropTypes.bool,
 	room: PropTypes.object,
-	refetch: PropTypes.func,
+	refetchRoom: PropTypes.func,
+	refetchBooking: PropTypes.func,
 };
 
 export default BookingFormModal;
