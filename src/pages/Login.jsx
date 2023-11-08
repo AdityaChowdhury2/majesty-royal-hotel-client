@@ -10,10 +10,9 @@ import SocialLogin from '../components/shared/SocialLogin';
 import MyNavbar from '../components/MyNavbar';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../hooks/useAuth';
-// import toast from 'react-hot-toast';
-import useAxios from '../hooks/useAxios';
+import toast from 'react-hot-toast';
+// import useAxios from '../hooks/useAxios';
 import useCustomToast from '../hooks/useCustomToast';
-import { toast } from 'react-hot-toast';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -21,16 +20,14 @@ const Login = () => {
 	const [isShowPassword, setIsShowPassword] = useShowPassword();
 	const { setMessage } = useCustomToast();
 	const [userForm, setUserForm] = useState({});
-	const secureAxios = useAxios();
 	const { loginUser, user } = useAuth();
 	const handleInputField = e => {
 		setUserForm({ ...userForm, [e.target.name]: e.target.value });
 	};
 	const handleFormSubmit = e => {
 		e.preventDefault();
-		console.log(userForm);
 		loginUser(userForm)
-			.then(res => {
+			.then(() => {
 				setMessage('login successful');
 				navigate(location.state || '/', { replace: true });
 			})

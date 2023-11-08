@@ -9,6 +9,10 @@ import { Toaster } from 'react-hot-toast';
 import ToastProviders from './providers/ToastProviders';
 import CustomToast from './components/shared/CustomToast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init();
 
 const queryClient = new QueryClient(
 	new QueryClient({

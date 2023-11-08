@@ -10,8 +10,13 @@ const Pricing = () => {
 			</div>
 			<div className="bg-[url('https://i.ibb.co/gjhTGn9/banner.jpg')] bg-center bg-no-repeat bg-fixed bg-neutral-700 bg-blend-overlay bg-opacity-90">
 				<div className="relative items-center w-full px-5 py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
-					<div className="mx-auto space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:mx-auto xl:grid-cols-3 justify-items-center">
-						<div className="p-6 w-full bg-neutral-50 rounded-3xl bg-opacity-75">
+					<div className="mx-auto space-y-8 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:mx-auto xl:grid-cols-3 justify-items-center">
+						<div
+							data-aos="flip-left"
+							data-aos-easing="ease-out-cubic"
+							data-aos-duration="2000"
+							className="p-6 w-full bg-neutral-50 rounded-3xl bg-opacity-75"
+						>
 							<div className="flex flex-col p-4">
 								<div className="py-6">
 									<h2 className="text-5xl font-thin leading-6 text-neutral-600">
@@ -76,7 +81,12 @@ const Pricing = () => {
 								More Info
 							</a>
 						</div>
-						<div className="relative w-full p-6 bg-[#C19B76] rounded-3xl bg-opacity-75">
+						<div
+							data-aos="flip-left"
+							data-aos-easing="ease-out-cubic"
+							data-aos-duration="2000"
+							className="relative w-full p-6 bg-[#C19B76] rounded-3xl bg-opacity-75"
+						>
 							<div className="absolute inset-x-0 transform translate-y-px -top-1">
 								<div className="flex justify-center transform -translate-y-1/2 rounded-3xl">
 									<span className="inline-flex px-4 py-1 text-sm font-bold tracking-wider uppercase bg-white border-8 border-[#C19B76] text-gray-800 rounded-xl">
@@ -149,7 +159,12 @@ const Pricing = () => {
 								</a>
 							</div>
 						</div>
-						<div className="p-6 w-full bg-neutral-50 rounded-3xl bg-opacity-75">
+						<div
+							data-aos="flip-left"
+							data-aos-easing="ease-out-cubic"
+							data-aos-duration="2000"
+							className="p-6 w-full bg-neutral-50 rounded-3xl bg-opacity-75"
+						>
 							<div className="flex flex-col p-4">
 								<div className="py-6">
 									<h2 className="text-5xl font-thin leading-6 text-neutral-600">

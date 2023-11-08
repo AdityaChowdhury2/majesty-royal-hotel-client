@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 const BookingFormModal = ({
 	refetchRoom,
 	openBookingModal,
+	setOpenBookingModal,
 	room,
 	onCloseModal,
 	refetchBooking,
@@ -159,7 +160,6 @@ const BookingFormModal = ({
 							showClearButton={false}
 							onSelectedDateChanged={date => {
 								checkIfAvailable(date);
-
 								setBookingDetails({
 									...bookingDetails,
 									bookingDate: moment(date).format('DD-MM-YYYY'),
@@ -219,6 +219,7 @@ const BookingFormModal = ({
 							openConfirmModal={openConfirmModal}
 							setOpenConfirmModal={setOpenConfirmModal}
 							room={room}
+							setOpenBookingModal={setOpenBookingModal}
 							calculatePriceAfterDiscount={calculatePriceAfterDiscount}
 						/>
 					</div>
@@ -234,6 +235,7 @@ BookingFormModal.propTypes = {
 	room: PropTypes.object,
 	refetchRoom: PropTypes.func,
 	refetchBooking: PropTypes.func,
+	setOpenBookingModal: PropTypes.func,
 };
 
 export default BookingFormModal;

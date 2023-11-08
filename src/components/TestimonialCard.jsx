@@ -2,10 +2,17 @@ import { Avatar } from 'flowbite-react';
 import PropTypes from 'prop-types';
 import { AiTwotoneStar } from 'react-icons/ai';
 
-const TestimonialCard = ({ review }) => {
+const TestimonialCard = ({ review, idx }) => {
 	const { photoURL, userName, rating, comment } = review;
+	const zoomOptions = ['up', 'down', 'down', 'up'];
 	return (
-		<div className="flex flex-col mx-4 my-6 ">
+		<div
+			className="flex flex-col mx-4 my-6 "
+			data-aos={`zoom-out-${zoomOptions[idx]}`}
+			data-aos-easing="ease-in-back"
+			data-aos-duration="2000"
+			data-aos-anchor-placement="top-bottom"
+		>
 			<div className="bg-neutral-50 rounded-xl drop-shadow-lg h-full">
 				<div className="px-4 py-12 sm:px-8 md:px-12 ">
 					<p className="relative px-6 py-1  md:text-lg italic text-center dark:text-gray-100">
@@ -47,6 +54,7 @@ const TestimonialCard = ({ review }) => {
 
 TestimonialCard.propTypes = {
 	review: PropTypes.object,
+	idx: PropTypes.number,
 };
 
 export default TestimonialCard;

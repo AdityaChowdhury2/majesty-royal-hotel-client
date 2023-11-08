@@ -11,7 +11,7 @@ import useAuth from '../../hooks/useAuth';
 import ReviewCard from '../../components/ReviewCard';
 
 const RoomDetails = () => {
-	const axiosSecure = useAxios();
+	const secureAxios = useAxios();
 	const { roomId } = useParams();
 	const { user } = useAuth();
 	const initialReview = {
@@ -33,7 +33,7 @@ const RoomDetails = () => {
 	const { data: reviews } = useQuery({
 		queryKey: ['review', isReviewSubmitted, roomId],
 		queryFn: async () => {
-			const response = await axiosSecure.get(
+			const response = await secureAxios.get(
 				`/api/v1/reviews/?roomId=${roomId}`
 			);
 			return response.data;
@@ -43,7 +43,7 @@ const RoomDetails = () => {
 	const { mutate: updateReview } = useMutation({
 		mutationFn: async data => {
 			console.log(data);
-			const response = await axiosSecure.patch(`/api/v1/room/${roomId}`, data);
+			const response = await secureAxios.patch(`/api/v1/room/${roomId}`, data);
 			return response.data;
 		},
 	});
@@ -51,7 +51,7 @@ const RoomDetails = () => {
 	const { data: BookedByUser, refetch: refetchBooking } = useQuery({
 		queryKey: ['bookingsByUser', user],
 		queryFn: async () => {
-			const response = await axiosSecure.get(
+			const response = await secureAxios.get(
 				`/api/v1/bookings/?email=${user.email}&roomId=${roomId}`
 			);
 			return response?.data;
@@ -65,7 +65,7 @@ const RoomDetails = () => {
 	} = useQuery({
 		queryKey: ['room', roomId],
 		queryFn: async () => {
-			const response = await axiosSecure.get(`/api/v1/room/${roomId}`);
+			const response = await secureAxios.get(`/api/v1/room/${roomId}`);
 			return response.data;
 		},
 	});
@@ -82,7 +82,7 @@ const RoomDetails = () => {
 	const handlePostReview = async e => {
 		e.preventDefault();
 
-		const response = await axiosSecure.post(`/api/v1/review`, review);
+		const response = await secureAxios.post(`/api/v1/review`, review);
 
 		if (response.data.acknowledged) {
 			e.target.reset();
@@ -189,6 +189,7 @@ const RoomDetails = () => {
 											refetchRoom={refetchRoom}
 											refetchBooking={refetchBooking}
 											openBookingModal={openBookingModal}
+											setOpenBookingModal={setOpenBookingModal}
 											onCloseModal={onCloseModal}
 										/>
 									</div>

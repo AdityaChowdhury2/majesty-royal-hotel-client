@@ -1,27 +1,30 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 import { useEffect } from 'react';
 
 const secureAxios = axios.create({
-	baseURL: 'https://hotel-management-server-aditya.vercel.app',
+	baseURL: import.meta.env.VITE_SERVER_URL,
 	withCredentials: true,
 });
 
 const useAxios = () => {
 	const { logOut } = useAuth();
+	const navigate = useNavigate();
 	useEffect(() => {
 		secureAxios.interceptors.response.use(
 			response => response,
 			err => {
 				console.log('error in interceptor', err.response.status);
-				if (err.response.status === 401 || err.response.status === 403) {
-					logOut()
-						.then(() => {})
-						.catch(err => console.log(err));
-				}
+
+				logOut()
+					.then(() => {
+						navigate('/login');
+					})
+					.catch(err => console.log(err));
 			}
 		);
-	}, [logOut]);
+	}, []);
 	return secureAxios;
 };
 

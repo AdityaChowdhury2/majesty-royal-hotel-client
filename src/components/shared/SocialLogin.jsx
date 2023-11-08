@@ -8,14 +8,14 @@ const SocialLogin = () => {
 	const { googleLogin } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
-	const axiosSecure = useAxios();
+	const secureAxios = useAxios();
 	const { setMessage } = useCustomToast();
 	const handleGoogleLogin = () => {
 		googleLogin()
 			.then(res => {
 				setMessage('Successfully logged in');
 				navigate(location.state || '/', { replace: true });
-				axiosSecure
+				secureAxios
 					.post('/api/v1/user', {
 						email: res.user.email,
 						displayName: res.user.displayName,

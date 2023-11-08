@@ -9,6 +9,8 @@ import toast from 'react-hot-toast';
 const BookingUpdateModal = ({
 	openUpdateModal,
 	onCloseUpdateModal,
+	setOpenUpdateModal,
+	refetchBookings,
 	booking,
 }) => {
 	console.log(booking);
@@ -30,12 +32,16 @@ const BookingUpdateModal = ({
 	};
 
 	const handleUpdateBooking = async () => {
-		const response = await secureAxios.patch(
-			`/api/v1/bookings/${booking._id}`,
-			{ bookingDate }
-		);
+		const response = await secureAxios
+			.patch(`/api/v1/bookings/${booking._id}`, { bookingDate })
+			.catch(err => {
+				console.log(err);
+				toast.error('Error updating');
+			});
 		console.log(response.data);
+		refetchBookings();
 		toast.success('Updated bookings');
+		setOpenUpdateModal(false);
 	};
 
 	return (
@@ -181,6 +187,8 @@ BookingUpdateModal.propTypes = {
 	booking: PropTypes.object,
 	onCloseUpdateModal: PropTypes.func,
 	openUpdateModal: PropTypes.bool,
+	refetchBookings: PropTypes.func,
+	setOpenUpdateModal: PropTypes.func,
 };
 
 export default BookingUpdateModal;

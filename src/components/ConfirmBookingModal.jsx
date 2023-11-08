@@ -9,16 +9,17 @@ const ConfirmBookingModal = ({
 	setOpenConfirmModal,
 	openConfirmModal,
 	bookingDetails,
+	setOpenBookingModal,
 	refetchBooking,
 	refetchRoom,
 	calculatePriceAfterDiscount,
 	room,
 }) => {
 	const params = useParams();
-	const axiosSecure = useAxios();
+	const secureAxios = useAxios();
 	const { mutateAsync } = useMutation({
 		mutationFn: async data => {
-			const response = await axiosSecure.post('/api/v1/user/book-room', data);
+			const response = await secureAxios.post('/api/v1/user/book-room', data);
 			return response.data;
 		},
 		onSuccess: () => {
@@ -35,7 +36,7 @@ const ConfirmBookingModal = ({
 		try {
 			console.log(bookingDetails);
 			await mutateAsync(bookingDetails);
-			axiosSecure
+			secureAxios
 				.patch(`/api/v1/room/${params.roomId}`, {
 					seatsCount: bookingDetails.seatsCount,
 				})
@@ -43,6 +44,7 @@ const ConfirmBookingModal = ({
 					console.log(res);
 					refetchBooking();
 					refetchRoom();
+					setOpenBookingModal(false);
 				});
 		} catch (error) {
 			console.log(error);
@@ -96,6 +98,7 @@ const ConfirmBookingModal = ({
 ConfirmBookingModal.propTypes = {
 	setOpenConfirmModal: PropTypes.func,
 	openConfirmModal: PropTypes.bool,
+	setOpenBookingModal: PropTypes.func,
 	bookingDetails: PropTypes.object,
 	refetchBooking: PropTypes.func,
 	refetchRoom: PropTypes.func,

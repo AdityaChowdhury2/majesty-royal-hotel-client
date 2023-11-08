@@ -10,7 +10,13 @@ const WhyChooseUs = () => {
 				<div className="container mx-auto xl:px-32">
 					<div className="grid grid-cols-1 md:grid-cols-2">
 						<div className="mb-12 md:mt-12 lg:mt-0 lg:mb-0">
-							<div className="relative z-[1] block rounded-lg bg-[hsla(0,0%,100%,0.55)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] backdrop-blur-[25px] md:px-12 lg:-mr-14">
+							<div
+								data-aos="fade-right"
+								data-aos-easing="ease-in-back"
+								data-aos-duration="2000"
+								data-aos-anchor-placement="top-bottom"
+								className="relative z-[1] block rounded-lg bg-[hsla(0,0%,100%,0.55)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] backdrop-blur-[25px] md:px-12 lg:-mr-14"
+							>
 								<h2 className="mb-6 text-lg md:text-xl lg:text-3xl font-bold">
 									Why we are the best?
 								</h2>
@@ -205,7 +211,13 @@ const WhyChooseUs = () => {
 								</div>
 							</div>
 						</div>
-						<div className="md:mb-12 lg:mb-0 ">
+						<div
+							data-aos="fade-left"
+							data-aos-easing="ease-in-back"
+							data-aos-duration="2000"
+							data-aos-anchor-placement="top-bottom"
+							className="md:mb-12 lg:mb-0 "
+						>
 							<img
 								src="https://i.ibb.co/yRR6pQD/whychoose-Us.jpg"
 								className="h-auto w-full rounded-lg shadow-lg  rotate-6"

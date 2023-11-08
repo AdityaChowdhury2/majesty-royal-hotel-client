@@ -6,7 +6,7 @@ import Lottie from 'lottie-react';
 import notFound from '../assets/animations/notFound.json';
 
 const Testimonial = () => {
-	const axiosSecure = useAxios();
+	const secureAxios = useAxios();
 	const {
 		data: reviews,
 		isLoading,
@@ -14,7 +14,7 @@ const Testimonial = () => {
 	} = useQuery({
 		queryKey: ['reviewsForHome'],
 		queryFn: async () => {
-			const response = await axiosSecure.get('/api/v1/reviews/?limit=4');
+			const response = await secureAxios.get('/api/v1/reviews/?limit=4');
 			return response.data;
 		},
 	});
@@ -38,8 +38,8 @@ const Testimonial = () => {
 						</>
 					) : (
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-							{reviews.map(review => (
-								<TestimonialCard key={review._id} review={review} />
+							{reviews.map((review, idx) => (
+								<TestimonialCard idx={idx} key={review._id} review={review} />
 							))}
 						</div>
 					)}

@@ -16,7 +16,7 @@ const Rooms = () => {
 	const [sortingOrder, setSortingOrder] = useState(-1);
 	const [priceRange, setPriceRange] = useState(550);
 	const [currentPage, setCurrentPage] = useState(0);
-	const axiosSecure = useAxios();
+	const secureAxios = useAxios();
 	const onSortingOrderChange = e => {
 		setCurrentPage(0);
 		setSortingOrder(e.target.value);
@@ -31,7 +31,7 @@ const Rooms = () => {
 		queryKey: ['rooms', sortingOrder, priceRange, currentPage],
 		keepPreviousData: true,
 		queryFn: async () => {
-			const response = await axiosSecure.get(
+			const response = await secureAxios.get(
 				`/api/v1/room/?sortingOrder=${sortingOrder}&priceRange=${priceRange}&currentPage=${currentPage}`
 			);
 			return response.data;

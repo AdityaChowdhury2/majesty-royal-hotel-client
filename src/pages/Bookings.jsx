@@ -9,7 +9,7 @@ import BookingRow from '../components/BookingRow';
 
 const Bookings = () => {
 	const { user } = useAuth();
-	const axiosSecure = useAxios();
+	const secureAxios = useAxios();
 	const {
 		data: bookings,
 		isLoading,
@@ -17,9 +17,8 @@ const Bookings = () => {
 	} = useQuery({
 		queryKey: ['bookings', user.email],
 		queryFn: async () => {
-			const response = await axiosSecure.get(
-				`/api/v1/bookings/?email=${user.email}`,
-				{ withCredentials: true }
+			const response = await secureAxios.get(
+				`/api/v1/bookings/?email=${user.email}`
 			);
 			return response.data;
 		},

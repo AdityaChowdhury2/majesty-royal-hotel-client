@@ -24,12 +24,16 @@ const RoomCard = ({ room }) => {
 					<h5 className="absolute bottom-8 left-10 text-3xl font-semibold tracking-tight text-[#8a735d] font-gilda-display">
 						{roomName}
 					</h5>
-					{specialOffer ? (
+					{specialOffer && seatsAvailable ? (
 						<div className="bg-[#C19B76] text-white px-2 w-24 absolute top-2 right-0 uppercase rounded-l-xl">
 							{specialOffer}% off
 						</div>
-					) : (
+					) : seatsAvailable ? (
 						<></>
+					) : (
+						<div className="bg-red-500 text-white px-2 w-36  absolute top-2 right-0 rounded-l-xl">
+							Not available
+						</div>
 					)}
 				</div>
 				<div className="px-5 pb-5">
@@ -46,11 +50,7 @@ const RoomCard = ({ room }) => {
 							<p>No Review found</p>
 						)}
 					</div>
-					{seatsAvailable ? (
-						<p>{seatsAvailable}&apos;s Seat</p>
-					) : (
-						<p>No seats available</p>
-					)}
+					{seatsAvailable ? <p>{seatsAvailable}&apos;s Seat</p> : <></>}
 				</div>
 			</Link>
 		</div>

@@ -8,7 +8,7 @@ import DeleteBookingModal from './DeleteBookingModal';
 import BookingUpdateModal from './BookingUpdateModal';
 
 const BookingRow = ({ booking, refetchBookings }) => {
-	const axiosSecure = useAxios();
+	const secureAxios = useAxios();
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
 	const [openUpdateModal, setOpenUpdateModal] = useState(false);
 	const { seatsCount, _id, bookingDate, roomName, price } = booking;
@@ -21,7 +21,7 @@ const BookingRow = ({ booking, refetchBookings }) => {
 		const daysDiff = bookingDay.diff(today, 'days');
 
 		if (daysDiff > 1) {
-			const response = await axiosSecure.delete(`/api/v1/bookings/${_id}`);
+			const response = await secureAxios.delete(`/api/v1/bookings/${_id}`);
 			console.log(response.data);
 			refetchBookings();
 			toast.success('Bookings deleted successfully');
@@ -52,6 +52,7 @@ const BookingRow = ({ booking, refetchBookings }) => {
 				</button>
 				<BookingUpdateModal
 					booking={booking}
+					refetchBookings={refetchBookings}
 					setOpenUpdateModal={setOpenUpdateModal}
 					openUpdateModal={openUpdateModal}
 					onCloseUpdateModal={onCloseUpdateModal}
