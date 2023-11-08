@@ -1,5 +1,6 @@
 import axios from 'axios';
 import useAuth from './useAuth';
+import { useEffect } from 'react';
 
 const secureAxios = axios.create({
 	baseURL: 'http://localhost:5000',
@@ -8,16 +9,18 @@ const secureAxios = axios.create({
 
 const useAxios = () => {
 	const { logOut } = useAuth();
-	secureAxios.interceptors.response.use(
-		response => {
-			return response;
-		},
-		err => {
-			if (err.response.status === 401 || err.response.status === 403) {
-				logOut();
+	useEffect(() => {
+		secureAxios.interceptors.response.use(
+			response => response,
+			err => {
+				if (err.response.status === 401 || err.response.status === 403) {
+					logOut()
+						.then(() => {})
+						.catch(err => console.log(err));
+				}
 			}
-		}
-	);
+		);
+	}, [logOut]);
 	return secureAxios;
 };
 
