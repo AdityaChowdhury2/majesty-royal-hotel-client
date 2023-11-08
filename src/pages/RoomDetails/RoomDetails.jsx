@@ -30,7 +30,7 @@ const RoomDetails = () => {
 		setOpenBookingModal(false);
 	}
 
-	const { data: reviews, refetch: refetchReviews } = useQuery({
+	const { data: reviews } = useQuery({
 		queryKey: ['review', isReviewSubmitted, roomId],
 		queryFn: async () => {
 			const response = await axiosSecure.get(

@@ -3,7 +3,7 @@ import useAuth from './useAuth';
 import { useEffect } from 'react';
 
 const secureAxios = axios.create({
-	baseURL: 'http://localhost:5000',
+	baseURL: 'https://hotel-management-server-aditya.vercel.app',
 	withCredentials: true,
 });
 
@@ -13,6 +13,7 @@ const useAxios = () => {
 		secureAxios.interceptors.response.use(
 			response => response,
 			err => {
+				console.log('error in interceptor', err.response.status);
 				if (err.response.status === 401 || err.response.status === 403) {
 					logOut()
 						.then(() => {})

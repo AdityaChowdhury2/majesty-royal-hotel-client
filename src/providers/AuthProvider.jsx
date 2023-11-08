@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
 			if (loggedUser) {
 				axios
 					.post(
-						'http://localhost:5000/api/v1/user/create-token',
+						'https://hotel-management-server-aditya.vercel.app/api/v1/user/create-token',
 						{
 							email: loggedUser,
 						},
@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
 			} else {
 				axios
 					.post(
-						'http://localhost:5000/api/v1/user/logout',
+						'https://hotel-management-server-aditya.vercel.app/api/v1/user/logout',
 						{
 							email: loggedUser,
 						},
