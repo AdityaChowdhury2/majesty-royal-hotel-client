@@ -16,12 +16,16 @@ const SocialLogin = () => {
 				setMessage('Successfully logged in');
 				navigate(location.state || '/', { replace: true });
 				axiosSecure
-					.post('/api/v1/user', {
-						email: res.user.email,
-						displayName: res.user.displayName,
-						photoURL: res.user.photoURL,
-						uid: res.user.uid,
-					})
+					.post(
+						'/api/v1/user',
+						{
+							email: res.user.email,
+							displayName: res.user.displayName,
+							photoURL: res.user.photoURL,
+							uid: res.user.uid,
+						},
+						{ withCredentials: true }
+					)
 					.then(res => {
 						console.log(res.data);
 					})

@@ -1,12 +1,12 @@
 const WhyChooseUs = () => {
 	return (
-		<section className="my-8 text-center lg:text-left overflow-hidden">
+		<section className="text-center lg:text-left overflow-hidden bg-[#eee6de] rounded-b-[5rem]">
 			<div className="container flex flex-col items-center mx-auto mb-5 md:mb-8 lg:mb-12 md:p-10 md:px-12">
 				<h1 className="p-4 text-xl md:text-2xl lg:text-4xl font-semibold  text-center">
 					Discover Our Premium Features
 				</h1>
 			</div>
-			<div className="py-12 md:px-6 lg:px-12">
+			<div className="pb-12 md:pb-0 lg:pb-12">
 				<div className="container mx-auto xl:px-32">
 					<div className="grid grid-cols-1 md:grid-cols-2">
 						<div className="mb-12 md:mt-12 lg:mt-0 lg:mb-0">
@@ -25,7 +25,7 @@ const WhyChooseUs = () => {
 
 								<div className="grid gap-x-6 md:grid-cols-3 lg:grid-cols-2">
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
 									</div>
 
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -65,7 +65,7 @@ const WhyChooseUs = () => {
 									</div>
 
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -83,8 +83,9 @@ const WhyChooseUs = () => {
 											City Center
 										</p>
 									</div>
+
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -99,12 +100,12 @@ const WhyChooseUs = () => {
 													d="M4.5 12.75l6 6 9-13.5"
 												/>
 											</svg>
-											Free Breakfast
+											Free Meal
 										</p>
 									</div>
 
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -124,7 +125,7 @@ const WhyChooseUs = () => {
 									</div>
 
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -143,7 +144,7 @@ const WhyChooseUs = () => {
 										</p>
 									</div>
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -163,7 +164,7 @@ const WhyChooseUs = () => {
 									</div>
 
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
@@ -183,7 +184,7 @@ const WhyChooseUs = () => {
 									</div>
 
 									<div className="mb-6">
-										<p className="flex items-center">
+										<p className="flex items-center text-base md:text-sm lg:text-base">
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
 												fill="none"
