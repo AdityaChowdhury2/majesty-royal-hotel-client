@@ -2,7 +2,7 @@ import axios from 'axios';
 import useAuth from './useAuth';
 
 const secureAxios = axios.create({
-	baseURL: 'https://hotel-management-server-aditya.vercel.app',
+	baseURL: 'http://localhost:5000',
 	withCredentials: true,
 });
 

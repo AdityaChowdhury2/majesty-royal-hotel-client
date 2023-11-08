@@ -5,11 +5,16 @@ import useAxios from '../hooks/useAxios';
 import moment from 'moment';
 import { useState } from 'react';
 import DeleteBookingModal from './DeleteBookingModal';
+import BookingUpdateModal from './BookingUpdateModal';
 
 const BookingRow = ({ booking, refetchBookings }) => {
 	const axiosSecure = useAxios();
 	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+	const [openUpdateModal, setOpenUpdateModal] = useState(false);
 	const { seatsCount, _id, bookingDate, roomName, price } = booking;
+	function onCloseUpdateModal() {
+		setOpenUpdateModal(false);
+	}
 	const handleDeleteBooking = async () => {
 		const today = moment();
 		const bookingDay = moment(bookingDate, 'DD-MM-YYYY');
@@ -24,6 +29,7 @@ const BookingRow = ({ booking, refetchBookings }) => {
 			toast.error('Can not cancel booking');
 		}
 	};
+
 	return (
 		<Table.Row
 			key={_id}
@@ -36,9 +42,20 @@ const BookingRow = ({ booking, refetchBookings }) => {
 			<Table.Cell>{bookingDate}</Table.Cell>
 			<Table.Cell>{price}</Table.Cell>
 			<Table.Cell className="space-x-2">
-				<button className="px-3 py-1 rounded-md bg-green-500 text-white hover:bg-green-600 transition-all duration-300">
+				<button
+					onClick={() => {
+						setOpenUpdateModal(true);
+					}}
+					className="px-3 py-1 rounded-md bg-green-500 text-white hover:bg-green-600 transition-all duration-300"
+				>
 					Update
 				</button>
+				<BookingUpdateModal
+					booking={booking}
+					setOpenUpdateModal={setOpenUpdateModal}
+					openUpdateModal={openUpdateModal}
+					onCloseUpdateModal={onCloseUpdateModal}
+				/>
 				<button
 					onClick={() => {
 						setOpenDeleteModal(true);

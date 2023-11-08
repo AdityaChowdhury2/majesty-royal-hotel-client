@@ -10,6 +10,7 @@ import RoomCard from '../../components/RoomCard';
 import Pagination from '../../components/Pagination';
 import Lottie from 'lottie-react';
 import Loading from '../../components/shared/Loading';
+import { Helmet } from 'react-helmet-async';
 
 const Rooms = () => {
 	const [sortingOrder, setSortingOrder] = useState(-1);
@@ -45,6 +46,9 @@ const Rooms = () => {
 	// console.log(pages);
 	return (
 		<>
+			<Helmet>
+				<title>Majesty Royal || Rooms</title>
+			</Helmet>
 			<PageHeader title={'Rooms'} />
 			<section className="py-5 bg-[#D9D9D9]">
 				<div className="flex justify-center gap-5 container">

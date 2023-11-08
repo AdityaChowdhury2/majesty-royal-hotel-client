@@ -15,16 +15,15 @@ const Bookings = () => {
 		isLoading,
 		refetch: refetchBookings,
 	} = useQuery({
-		queryKey: ['bookings', user.uid],
+		queryKey: ['bookings', user.email],
 		queryFn: async () => {
 			const response = await axiosSecure.get(
-				`/api/v1/bookings/?uid=${user.uid}`
+				`/api/v1/bookings/?email=${user.email}`
 			);
 			return response.data;
 		},
+		retry: 5,
 	});
-	console.log(bookings);
-
 	return (
 		<div className="space-y-12">
 			<PageHeader title={'Bookings'} />

@@ -159,7 +159,7 @@ const Pricing = () => {
 										<del className="text-3xl font-medium text-dim">$49</del>
 									</h2>
 									<p className="mt-6 text-xl font-semibold text-neutral-600">
-										Hobby
+										Executive Room
 									</p>
 									<p className="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-50 text-gray-500 mt-2 w-full">
 										Free turndown service

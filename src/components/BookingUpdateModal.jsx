@@ -1,47 +1,25 @@
 import PropTypes from 'prop-types';
+import { Datepicker, Label, Modal, TextInput } from 'flowbite-react';
 import { BsCurrencyDollar } from 'react-icons/bs';
-
-import { Datepicker, Label, Modal, Select, TextInput } from 'flowbite-react';
-import { useState } from 'react';
-import moment from 'moment/moment';
-import useAuth from '../hooks/useAuth';
-import ConfirmBookingModal from './ConfirmBookingModal';
 import useAxios from '../hooks/useAxios';
+import moment from 'moment';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const BookingFormModal = ({
-	refetchRoom,
-	openBookingModal,
-	room,
-	onCloseModal,
-	refetchBooking,
+const BookingUpdateModal = ({
+	openUpdateModal,
+	onCloseUpdateModal,
+	booking,
 }) => {
-	const [openConfirmModal, setOpenConfirmModal] = useState(false);
-	const { price, roomName, seatsAvailable, specialOffer, _id } = room;
-	const { user } = useAuth();
-	const secureAxios = useAxios();
+	console.log(booking);
 	const [isAvailable, setIsAvailable] = useState(true);
-
-	const [bookingDetails, setBookingDetails] = useState({
-		uid: user.uid,
-		roomId: _id,
-		price,
-		email: user.email,
-		roomName,
-		seatsCount: seatsAvailable,
-		bookingDate: moment().format('DD-MM-YYYY'),
-	});
-
-	const calculatePriceAfterDiscount = price - (price * specialOffer) / 100;
-	const handleOnChange = e => {
-		setBookingDetails({ ...bookingDetails, [e.target.name]: e.target.value });
-	};
-
+	const [bookingDate, setBookingDate] = useState(booking.bookingDate);
+	const secureAxios = useAxios();
 	const checkIfAvailable = async date => {
 		const response = await secureAxios.get(
 			`/api/v1/bookings/?bookingDate=${moment(date).format(
 				'DD-MM-YYYY'
-			)}&roomId=${_id}`
+			)}&roomId=${booking.roomId}`
 		);
 		if (response.data.length) {
 			setIsAvailable(false);
@@ -51,9 +29,18 @@ const BookingFormModal = ({
 		}
 	};
 
+	const handleUpdateBooking = async () => {
+		const response = await secureAxios.patch(
+			`/api/v1/bookings/${booking._id}`,
+			{ bookingDate }
+		);
+		console.log(response.data);
+		toast.success('Updated bookings');
+	};
+
 	return (
 		<Modal
-			show={openBookingModal}
+			show={openUpdateModal}
 			theme={{
 				root: {
 					base: 'fixed top-0 right-0 left-0 z-30 h-modal h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full',
@@ -69,7 +56,7 @@ const BookingFormModal = ({
 				},
 			}}
 			size="md"
-			onClose={onCloseModal}
+			onClose={onCloseUpdateModal}
 			popup
 		>
 			<Modal.Header />
@@ -77,12 +64,12 @@ const BookingFormModal = ({
 				<form
 					onSubmit={e => {
 						e.preventDefault();
-						setOpenConfirmModal(true);
+						handleUpdateBooking();
 					}}
 					className="space-y-6"
 				>
 					<h3 className="text-xl font-medium text-gray-900 dark:text-white ">
-						Book Your {roomName}
+						Book Your {booking.roomName}
 					</h3>
 					<div>
 						<div className="mb-2 block">
@@ -91,43 +78,20 @@ const BookingFormModal = ({
 						<TextInput
 							id="name"
 							name="username"
-							placeholder="Enter your name"
-							onChange={handleOnChange}
-							required
+							value={booking.username}
+							readOnly
 						/>
 					</div>
 					<div>
 						<div className="mb-2 block">
 							<Label htmlFor="seatsCount" value="Book Seats" />
 						</div>
-						<Select
-							theme={{
-								field: {
-									select: {
-										base: `w-full ${
-											seatsAvailable ? 'cursor-default' : 'cursor-not-allowed'
-										}`,
-									},
-								},
-							}}
+						<TextInput
 							id="seatsCount"
-							defaultValue={seatsAvailable}
-							onChange={e => {
-								setBookingDetails({
-									...bookingDetails,
-									seatsCount: Number(e.target.value),
-								});
-							}}
 							name="seatsCount"
-							required
-							disabled={seatsAvailable ? false : true}
-						>
-							{[...Array(seatsAvailable).keys()].map((seat, idx) => (
-								<option key={idx} value={seat + 1}>
-									{seat + 1}
-								</option>
-							))}
-						</Select>
+							value={booking.seatsCount}
+							readOnly
+						/>
 					</div>
 					<div>
 						<div className="mb-2 block">
@@ -137,14 +101,14 @@ const BookingFormModal = ({
 							theme={{
 								field: {
 									input: {
-										base: 'block w-full border cursor-not-allowed',
+										base: 'block w-full border',
 									},
 								},
 							}}
 							id="price"
 							name="price"
 							icon={BsCurrencyDollar}
-							defaultValue={calculatePriceAfterDiscount}
+							value={booking.price}
 							readOnly
 						/>
 					</div>
@@ -159,11 +123,7 @@ const BookingFormModal = ({
 							showClearButton={false}
 							onSelectedDateChanged={date => {
 								checkIfAvailable(date);
-
-								setBookingDetails({
-									...bookingDetails,
-									bookingDate: moment(date).format('DD-MM-YYYY'),
-								});
+								setBookingDate(moment(date).format('DD-MM-YYYY'));
 							}}
 							theme={{
 								root: {
@@ -204,23 +164,12 @@ const BookingFormModal = ({
 					<div className="w-full text-center">
 						<button
 							className={`text-white bg-[#C19B76] hover:bg-[#b89470] focus:bg-[#C19B76] px-3 py-1 rounded-md ${
-								seatsAvailable && isAvailable
-									? 'cursor-pointer'
-									: 'cursor-not-allowed opacity-50'
+								isAvailable ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
 							}`}
-							disabled={seatsAvailable && isAvailable ? false : true}
+							disabled={isAvailable ? false : true}
 						>
 							Book Now
 						</button>
-						<ConfirmBookingModal
-							bookingDetails={bookingDetails}
-							refetchRoom={refetchRoom}
-							refetchBooking={refetchBooking}
-							openConfirmModal={openConfirmModal}
-							setOpenConfirmModal={setOpenConfirmModal}
-							room={room}
-							calculatePriceAfterDiscount={calculatePriceAfterDiscount}
-						/>
 					</div>
 				</form>
 			</Modal.Body>
@@ -228,12 +177,10 @@ const BookingFormModal = ({
 	);
 };
 
-BookingFormModal.propTypes = {
-	onCloseModal: PropTypes.func,
-	openBookingModal: PropTypes.bool,
-	room: PropTypes.object,
-	refetchRoom: PropTypes.func,
-	refetchBooking: PropTypes.func,
+BookingUpdateModal.propTypes = {
+	booking: PropTypes.object,
+	onCloseUpdateModal: PropTypes.func,
+	openUpdateModal: PropTypes.bool,
 };
 
-export default BookingFormModal;
+export default BookingUpdateModal;

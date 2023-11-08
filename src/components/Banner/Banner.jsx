@@ -29,9 +29,9 @@ const Banner = () => {
 			></div>
 
 			<swiper-slide>
-				<div className={'py-40 text-center'}>
+				<div className={'py-40 text-center px-5'}>
 					<div
-						className="title font-gilda-display "
+						className="title text-xl md:text-2xl lg:text-4xl font-gilda-display"
 						data-swiper-parallax="-300"
 					>
 						Unwind in Luxurious Comfort
@@ -40,7 +40,7 @@ const Banner = () => {
 						className="text md:max-w-lg lg:max-w-xl mx-auto"
 						data-swiper-parallax="-100"
 					>
-						<p className="text-xl">
+						<p className="mt-5 text-sm md:text-base lg:text-xl ">
 							Experience opulence like never before. Our premium suites offer
 							the perfect blend of modern amenities and timeless elegance.
 							Unwind in spacious rooms with stunning views and indulge in
@@ -56,9 +56,9 @@ const Banner = () => {
 				</div>
 			</swiper-slide>
 			<swiper-slide>
-				<div className={'py-40 text-center'}>
+				<div className={'py-40 text-center px-5'}>
 					<div
-						className="title font-gilda-display "
+						className="title text-xl md:text-2xl lg:text-4xl font-gilda-display "
 						data-swiper-parallax="-300"
 					>
 						Discover Local Charm
@@ -67,7 +67,7 @@ const Banner = () => {
 						className="text md:max-w-lg lg:max-w-xl mx-auto"
 						data-swiper-parallax="-100"
 					>
-						<p className="text-xl">
+						<p className="mt-5 text-sm md:text-base lg:text-xl ">
 							Explore the rich culture and heritage of our location. Immerse
 							yourself in local traditions, flavors, and experiences. From
 							vibrant markets to historic landmarks, your adventure awaits just
@@ -83,9 +83,9 @@ const Banner = () => {
 				</div>
 			</swiper-slide>
 			<swiper-slide>
-				<div className={'py-40 text-center'}>
+				<div className={'py-40 text-center px-5'}>
 					<div
-						className="title font-gilda-display "
+						className="title text-xl md:text-2xl lg:text-4xl font-gilda-display "
 						data-swiper-parallax="-300"
 					>
 						Special Offers Await
@@ -94,7 +94,7 @@ const Banner = () => {
 						className="text md:max-w-lg lg:max-w-xl mx-auto"
 						data-swiper-parallax="-100"
 					>
-						<p className="text-xl">
+						<p className="mt-5 text-sm md:text-base lg:text-xl ">
 							Your dream getaway is now even more inviting. Don&apos;t miss our
 							exclusive limited-time offers, including discounted room rates,
 							romantic packages, and family-friendly deals. Book today and

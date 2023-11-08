@@ -42,18 +42,19 @@ const RoomDetails = () => {
 
 	const { mutate: updateReview } = useMutation({
 		mutationFn: async data => {
+			console.log(data);
 			const response = await axiosSecure.patch(`/api/v1/room/${roomId}`, data);
 			return response.data;
 		},
 	});
 
-	const { data: isBookedByUser, refetch: refetchBooking } = useQuery({
-		queryKey: ['bookingsLength', user.uid],
+	const { data: BookedByUser, refetch: refetchBooking } = useQuery({
+		queryKey: ['bookingsByUser', user],
 		queryFn: async () => {
 			const response = await axiosSecure.get(
-				`/api/v1/bookings/?uid=${user.uid}`
+				`/api/v1/bookings/?email=${user.email}&roomId=${roomId}`
 			);
-			return response.data.length;
+			return response?.data;
 		},
 	});
 
@@ -87,8 +88,7 @@ const RoomDetails = () => {
 			e.target.reset();
 			setIsReviewSubmitted(true);
 			setReview(initialReview);
-			refetchReviews();
-			updateReview({ reviewCount: reviews.length });
+			updateReview({ reviewCount: reviews.length + 1 });
 		}
 	};
 
@@ -198,7 +198,7 @@ const RoomDetails = () => {
 								<h4 className="my-2 font-gilda-display text-3xl">
 									User Reviews :
 								</h4>
-								{reviews.length > 0 ? (
+								{reviews?.length > 0 ? (
 									<div className="space-y-4">
 										{reviews.map(rev => (
 											<ReviewCard key={rev._id} review={rev} />
@@ -211,7 +211,7 @@ const RoomDetails = () => {
 								)}
 								{/* */}
 
-								{isBookedByUser ? (
+								{BookedByUser?.length ? (
 									<form onSubmit={handlePostReview} className="mt-10 space-y-4">
 										<h3>Give a review: </h3>
 										<div>
