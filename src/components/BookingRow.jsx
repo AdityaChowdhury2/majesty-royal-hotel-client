@@ -16,6 +16,7 @@ const BookingRow = ({ booking, refetchBookings }) => {
 		setOpenUpdateModal(false);
 	}
 	const handleDeleteBooking = async () => {
+		const loadingToast = toast.loading('Cancelling...');
 		const today = moment();
 		const bookingDay = moment(bookingDate, 'DD-MM-YYYY');
 		const daysDiff = bookingDay.diff(today, 'days');
@@ -24,9 +25,9 @@ const BookingRow = ({ booking, refetchBookings }) => {
 			const response = await secureAxios.delete(`/api/v1/bookings/${_id}`);
 			console.log(response.data);
 			refetchBookings();
-			toast.success('Bookings deleted successfully');
+			toast.success('Bookings deleted successfully', { id: loadingToast });
 		} else {
-			toast.error('Can not cancel booking');
+			toast.error('Can not cancel booking', { id: loadingToast });
 		}
 	};
 
@@ -35,7 +36,7 @@ const BookingRow = ({ booking, refetchBookings }) => {
 			key={_id}
 			className="bg-white dark:border-gray-700 dark:bg-gray-800"
 		>
-			<Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+			<Table.Cell className="whitespace-nowrap  font-medium text-gray-900 dark:text-white">
 				{roomName}
 			</Table.Cell>
 			<Table.Cell>{seatsCount}</Table.Cell>

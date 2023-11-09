@@ -7,8 +7,9 @@ import toast from 'react-hot-toast';
 const MyNavbar = () => {
 	const { user, logOut } = useAuth();
 	const handleLogOut = () => {
+		const toastId = toast.loading('Logging out...');
 		logOut().then(() => {
-			toast.success('User logged out');
+			toast.success('User logged out', { id: toastId });
 		});
 	};
 	return (
@@ -38,7 +39,12 @@ const MyNavbar = () => {
 								</Dropdown.Header>
 								<Dropdown.Item>Settings</Dropdown.Item>
 								<Dropdown.Divider />
-								<Dropdown.Item onClick={handleLogOut}>Sign out</Dropdown.Item>
+								<Dropdown.Item
+									className="font-bold text-red-400"
+									onClick={handleLogOut}
+								>
+									Sign out
+								</Dropdown.Item>
 							</Dropdown>
 						) : (
 							<Link to={'/login'}>

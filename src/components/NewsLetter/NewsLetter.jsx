@@ -1,6 +1,19 @@
+import { useState } from 'react';
+import {
+	LayerGroup,
+	LayersControl,
+	MapContainer,
+	Marker,
+	Popup,
+	TileLayer,
+} from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import './NewsLetter.css';
+
 const NewsLetter = () => {
-	return (
-		<section className="px-5">
+	const center = [22.34217462083382, 91.83676088176085];
+	const overLay = (
+		<div className="absolute z-[999] bottom-0 w-8/12 left-[16%]">
 			<div className="flex flex-col container mx-auto overflow-hidden bg-white rounded-lg shadow-lg md:flex-row md:h-48 my-12">
 				<div className="md:flex md:items-center md:justify-center md:w-1/2 bg-[#eee6de] gap-5">
 					<div className="px-6 py-6 md:px-8 md:py-0">
@@ -9,12 +22,8 @@ const NewsLetter = () => {
 						</h2>
 
 						<p className="mt-2 text-sm text-neutral-700">
-							Be the first to hear about our latest promotions, exclusive deals,
-							and exciting updates. By subscribing to our newsletter,
-							you&apos;ll receive special offers and travel inspirations right
-							in your inbox. Join our community of travelers and unlock a world
-							of fantastic deals. Sign up now and start receiving the best hotel
-							offers and travel tips!
+							Join our community of travelers and unlock a world of fantastic
+							deals.
 						</p>
 					</div>
 				</div>
@@ -37,6 +46,22 @@ const NewsLetter = () => {
 					</form>
 				</div>
 			</div>
+		</div>
+	);
+	return (
+		<section className="px-5 relative">
+			<MapContainer center={center} zoom={13} scrollWheelZoom={false}>
+				<TileLayer
+					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+				/>
+				<LayerGroup>
+					<Marker position={center}>
+						<Popup>We are here</Popup>
+					</Marker>
+				</LayerGroup>
+				{overLay}
+			</MapContainer>
 		</section>
 	);
 };
