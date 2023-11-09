@@ -9,7 +9,7 @@ import Bookings from '../pages/Bookings';
 import RoomDetails from '../pages/RoomDetails/RoomDetails';
 import PrivateRoute from './PrivateRoute';
 import ContactUs from '../pages/ContactUs';
-import About from '../pages/About';
+import Gallery from '../pages/Gallery/Gallery';
 
 const Routes = createBrowserRouter([
 	{
@@ -30,8 +30,8 @@ const Routes = createBrowserRouter([
 				element: <ContactUs />,
 			},
 			{
-				path: '/about',
-				element: <About />,
+				path: '/gallery',
+				element: <Gallery />,
 			},
 			{
 				path: '/room/:roomId',

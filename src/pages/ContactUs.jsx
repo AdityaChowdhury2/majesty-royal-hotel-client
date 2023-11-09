@@ -131,7 +131,7 @@ const ContactUs = () => {
 								<div className="mt-4">
 									<button
 										type="submit"
-										className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+										className="inline-block w-full rounded-lg bg-[#C19B76] hover:bg-[#b89470] focus:bg-[#C19B76] px-5 py-3 font-medium text-white sm:w-auto"
 									>
 										Send Enquiry
 									</button>

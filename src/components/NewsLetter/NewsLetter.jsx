@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import {
 	LayerGroup,
-	LayersControl,
 	MapContainer,
 	Marker,
 	Popup,

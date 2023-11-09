@@ -75,10 +75,10 @@ const MyNavbar = () => {
 							Contact
 						</Link>
 						<Link
-							to={'/about'}
+							to={'/gallery'}
 							className="block py-2 pr-4 pl-3 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 md:border-0 md:hover:bg-transparent md:hover:text-[#C19B76]"
 						>
-							About us
+							Gallery
 						</Link>
 					</Navbar.Collapse>
 				</Navbar>
