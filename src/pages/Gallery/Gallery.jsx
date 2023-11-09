@@ -6,7 +6,7 @@ import Slide2 from './Slide2';
 
 const Gallery = () => {
 	return (
-		<section className="text-gray-600 body-font">
+		<section className="text-gray-600 body-font gallery">
 			<PageHeader title={'Gallery'} />
 			<div className="container px-5 py-24 mx-auto flex flex-wrap">
 				<div className="flex w-full mb-20 flex-wrap">
