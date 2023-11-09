@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
 			const loggedUser = currentUser?.email || user?.email;
 			setLoading(false);
 			setUser(currentUser);
-			console.log('AuthProvider:', loggedUser);
+
 			if (loggedUser) {
 				axios
 					.post(

@@ -18,7 +18,8 @@ const Bookings = () => {
 		queryKey: ['bookings', user.email],
 		queryFn: async () => {
 			const response = await secureAxios.get(
-				`/api/v1/bookings/?email=${user.email}`
+				`/api/v1/bookings/?email=${user.email}`,
+				{ withCredentials: true }
 			);
 			return response.data;
 		},
