@@ -37,7 +37,7 @@ const Testimonial = () => {
 							<Lottie animationData={notFound} loop={false}></Lottie>
 						</>
 					) : (
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-5 overflow-hidden">
 							{reviews.map((review, idx) => (
 								<TestimonialCard idx={idx} key={review._id} review={review} />
 							))}

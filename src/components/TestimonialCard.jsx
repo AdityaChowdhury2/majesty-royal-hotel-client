@@ -9,7 +9,7 @@ const TestimonialCard = ({ review, idx }) => {
 		<div
 			className="flex flex-col mx-4 my-6 "
 			data-aos={`zoom-out-${zoomOptions[idx]}`}
-			data-aos-easing="ease-in-back"
+			data-aos-easing="linear"
 			data-aos-duration="2000"
 			data-aos-anchor-placement="top-bottom"
 		>
