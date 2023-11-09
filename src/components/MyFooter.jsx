@@ -10,7 +10,7 @@ import Logo from './Logo';
 
 const MyFooter = () => {
 	return (
-		<div className="bg-[#D9D9D9] px-5">
+		<div className="bg-[#D9D9D9] px-5 mt-12">
 			<Footer className="container py-5 shadow-none bg-[#D9D9D9]">
 				<div className="w-full">
 					<div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">

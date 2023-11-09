@@ -36,14 +36,26 @@ const Bookings = () => {
 				<>
 					<Loading />
 				</>
-			) : (
-				<Table striped className="my-12 container">
+			) : bookings.length ? (
+				<Table
+					hoverable
+					theme={{
+						root: {
+							base: 'container w-full text-center text-sm text-gray-500 dark:text-gray-400',
+							shadow:
+								'absolute bg-white dark:bg-black w-full h-full top-0 left-0 rounded-lg drop-shadow-md -z-10',
+							wrapper: 'container relative',
+						},
+					}}
+				>
 					<Table.Head>
 						<Table.HeadCell>Room name</Table.HeadCell>
 						<Table.HeadCell>Seats</Table.HeadCell>
 						<Table.HeadCell>Date</Table.HeadCell>
 						<Table.HeadCell>Price</Table.HeadCell>
-						<Table.HeadCell></Table.HeadCell>
+						<Table.HeadCell>
+							<span className="sr-only">Action</span>
+						</Table.HeadCell>
 					</Table.Head>
 					<Table.Body className="divide-y">
 						{bookings.map(booking => (
@@ -55,6 +67,8 @@ const Bookings = () => {
 						))}
 					</Table.Body>
 				</Table>
+			) : (
+				<></>
 			)}
 		</div>
 	);
