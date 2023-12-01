@@ -6,6 +6,7 @@ import useAxios from '../hooks/useAxios';
 import Loading from '../components/shared/Loading';
 
 import BookingRow from '../components/BookingRow';
+import { Helmet } from 'react-helmet-async';
 
 const Bookings = () => {
 	const { user } = useAuth();
@@ -27,6 +28,9 @@ const Bookings = () => {
 	});
 	return (
 		<div className="space-y-12">
+			<Helmet>
+				<title>Majesty Royal || Gallery</title>
+			</Helmet>
 			<PageHeader title={'Bookings'} />
 			<h1 className="font-gilda-display text-4xl text-center my-5">
 				See your Bookings

@@ -1,8 +1,12 @@
+import { Helmet } from 'react-helmet-async';
 import PageHeader from '../components/shared/PageHeader';
 
 const ContactUs = () => {
 	return (
 		<>
+			<Helmet>
+				<title>Majesty Royal || Gallery</title>
+			</Helmet>
 			<PageHeader title={'Contact Us'} />
 
 			<section className="bg-gray-100">

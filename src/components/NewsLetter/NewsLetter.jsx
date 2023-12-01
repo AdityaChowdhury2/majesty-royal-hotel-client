@@ -5,8 +5,8 @@ import {
 	Popup,
 	TileLayer,
 } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 import './NewsLetter.css';
+import 'leaflet/dist/leaflet.css';
 
 const NewsLetter = () => {
 	const center = [22.34217462083382, 91.83676088176085];
@@ -37,7 +37,11 @@ const NewsLetter = () => {
 								aria-label="Enter your email"
 							/>
 
-							<button className="px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-[#C19B76] rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">
+							<button
+								className="px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform  rounded-md  focus:outline-none
+							 bg-[#C19B76] hover:bg-[#b89470] focus:bg-[#C19B76]
+							"
+							>
 								subscribe
 							</button>
 						</div>
