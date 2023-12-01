@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const PageHeader = ({ title }) => {
 	return (
-		<section className='bg-[url("https://i.ibb.co/XkvHt4Q/page-Header.jpg")] bg-[#151515] bg-opacity-70 bg-blend-overlay bg-no-repeat bg-center relative'>
+		<section className='bg-[url("https://i.ibb.co/tPcbB6h/page-Header.jpg")] bg-[#151515] bg-opacity-70 bg-blend-overlay bg-no-repeat bg-center relative'>
 			<div className="text-center pt-8 md:pt-40">
 				<h2 className="font-gilda-display text-5xl  text-neutral-200 pb-8 md:pb-40">
 					{title}
