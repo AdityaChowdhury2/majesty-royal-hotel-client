@@ -2,23 +2,29 @@
 
 ## Special Features
 
-- Verifying user from backend using JWT.
-- TanStack query to handle api calls. (useQuery, useMutation)
-- Created a custom toast
+- 🔐 **Backend User Verification:** Secure user verification using JWT.
+- 📡 **TanStack Query:** Efficient handling of API calls with useQuery and useMutation.
+- 🍞 **Custom Toast:** User-friendly custom toast notifications.
 
 ## Features
 
-- Responsive design
-- User's login and registration is handled by firebase
-- In Rooms Page rooms can be filter out by it's price and can sort on the basis of price.
-- User will see the rooms in paginated format.
-- In Room Details Page only user can book available rooms.
-- User can Book a room against the seats availability.
-- In the time of booking User can choose number of seats for one stay.
-- If booking confirmed available seats count will decrease.
-- In Bookings page user can see their bookings with Update And Cancel button.
-- User can't cancel a booking before one day.
+- 📱 **Responsive Design:** Experience luxury seamlessly on any device.
+- 🔐 **Firebase Authentication:** Secure user login and registration.
+- 🏨 **Rooms Page:**
+  - 💰 Filter rooms by price.
+  - 🔍 Sort rooms based on price.
+  - 📚 Paginated display for easy room exploration.
+- 🛌 **Room Details Page:**
+  - 📅 Book available rooms.
+  - 🎟️ Book a room against seat availability.
+  - 🪑 Choose the number of seats for a stay.
+  - 🔄 Update and cancel bookings in the Bookings page.
+  - ⏰ One-day restriction for cancellation.
 
 ## 🔗 Links
 
-[Live Link](https://majesty-royal-aditya.web.app)
+🚀 [Live Link](https://majesty-royal-aditya.web.app) - Explore luxury at Majesty Royal Hotel & Resort!
+
+---
+
+Indulge in a world of opulence and book your stay today!
