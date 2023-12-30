@@ -1,10 +1,4 @@
-import {
-	LayerGroup,
-	MapContainer,
-	Marker,
-	Popup,
-	TileLayer,
-} from 'react-leaflet';
+import { LayerGroup, MapContainer, Marker, TileLayer } from 'react-leaflet';
 import './NewsLetter.css';
 import 'leaflet/dist/leaflet.css';
 
@@ -58,9 +52,7 @@ const NewsLetter = () => {
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 				<LayerGroup>
-					<Marker position={center}>
-						<Popup>We are here</Popup>
-					</Marker>
+					<Marker position={center}></Marker>
 				</LayerGroup>
 				{overLay}
 			</MapContainer>
